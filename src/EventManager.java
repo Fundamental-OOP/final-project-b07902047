@@ -10,7 +10,7 @@ public class EventManager {
     ArrayList<Listener> listeners;
 
     /**
-     * Adds a listener to our list. It will receive events through it's notifyEvent(event) call.
+     * Adds a listener to our list. It will receive events through its notifyEvent(event) call.
      * @param listener listener to add
      */
     void registerListener(Listener listener) {
