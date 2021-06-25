@@ -22,8 +22,10 @@ public class Model extends Listener {
      * Start game engine loop
      */
     public void run() {
+        this.running = true;
         this.eventManager.post(new InitializeEvent());
         this.stateMachine.push(State.STATE_MENU);
+
         while (this.running) {
             this.eventManager.post(new TickEvent());
         }
@@ -37,14 +39,21 @@ public class Model extends Listener {
                 if (this.stateMachine.pop() == null) {
                     this.eventManager.post(new QuitEvent());
                 }
-            }
-            else {
+            } else {
                 this.stateMachine.push(stateChangeEvent.getState());
             }
         } else if (event instanceof TickEvent) {
             State curState = this.stateMachine.peek();
-            // user do nothing
-            // four cases to handle: STATE_MENU, STATE_PLAY, STATE_STOP, STATE_DEAD
+            switch (curState) {
+                case STATE_MENU:
+                    break;
+                case STATE_PLAY:
+                    break;
+                case STATE_STOP:
+                    break;
+                case STATE_DEAD:
+                    break;
+            }
         } else if (event instanceof JumpEvent) {
             // user press jump
             // should be in STATE_PLAY
