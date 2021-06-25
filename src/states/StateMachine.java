@@ -17,8 +17,7 @@ public class StateMachine {
      * @return current state or null
      */
     public State peek() {
-        if (stateStack.size() > 0) return stateStack.get(stateStack.size()-1);
-        return null;
+        return stateStack.size() > 0 ? stateStack.get(stateStack.size() - 1) : null;
     }
 
     /**
@@ -28,10 +27,11 @@ public class StateMachine {
     public State pop() {
         if (stateStack.size() > 0) {
             State state = peek();
-            this.stateStack.remove(stateStack.size()-1);
+            this.stateStack.remove(stateStack.size() - 1);
             return state;
         }
-        else return null;
+
+        return null;
     }
 
     /**
