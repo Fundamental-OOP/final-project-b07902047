@@ -24,6 +24,7 @@ public class Model extends Listener {
         eventManager.registerListener(this);
         this.stateMachine = new StateMachine();
         this.running = false;
+        this.bird = new Bird(1, 2, rnd.nextInt() % 3, 40, 244);
     }
 
     /**
