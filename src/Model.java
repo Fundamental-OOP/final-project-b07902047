@@ -1,6 +1,9 @@
 import events.*;
 import states.State;
 import states.StateMachine;
+import java.util.Random;
+
+import java.util.ArrayList;
 
 /**
  * Game engine that tracks the game state
@@ -9,6 +12,11 @@ public class Model extends Listener {
     EventManager eventManager;
     StateMachine stateMachine;
     boolean running;
+    Random rnd;
+
+    Bird bird;
+    ArrayList<Pipe> pipes;
+    Base base;
 
     public Model(EventManager eventManager) {
         this.name = "Model";
@@ -49,9 +57,16 @@ public class Model extends Listener {
             // user press jump
             // should be in STATE_PLAY
         } else if (event instanceof InitializeEvent) {
-            // initialize game setting
+            initialize();
+
         } else if (event instanceof QuitEvent) {
             this.running = false;
         }
+    }
+
+    private void initialize() {
+        this.bird = new Bird(0, 4, rnd.nextInt() % 2, 40, 244);
+        this.pipes = new ArrayList<Pipe>();
+        this.base = new Base(0, (int)(Const.mainConst.ScreenSize[0] * 0.8));
     }
 }
