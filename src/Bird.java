@@ -17,20 +17,20 @@ public class Bird {
 
     public int nextState() {
         state = (state + 1) % totState;
+        this.y += this.vel;
         return state;
     }
 
-    public void updateXY(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public void updateX(int x) {
+    public void setX(int x) {
         this.x = x;
     }
 
-    public void updateY(int y) {
+    public void setY(int y) {
         this.y = y;
+    }
+
+    public void setVel(int vel) {
+        this.vel = vel;
     }
 
     public int getX() {
