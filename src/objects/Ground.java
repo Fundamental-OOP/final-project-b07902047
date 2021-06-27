@@ -1,14 +1,13 @@
 package objects;
 
-public class Ground extends Object {
-    private int forwardSpeed;
+import constants.Const;
 
-    public Ground(int x, int y, int width, int height, int forwardSpeed) {
+public class Ground extends Object {
+    public Ground(int x, int y, int width, int height) {
         super(x, y, width, height);
-        this.forwardSpeed = forwardSpeed;
     }
 
     public void updateCoord() {
-        x = (x - forwardSpeed + width) % width;
+        x = (x - Const.forwardSpeed + width) % width;
     }
 }

@@ -1,8 +1,8 @@
 package objects;
 
+import constants.Const;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Random;
 
 public class PipeList {
@@ -42,28 +42,28 @@ public class PipeList {
         }
     }
 
-    private void getNewPipe(Map<String, Integer> config, int groundHeight) {
-        if (pipes.size() == 0 || pipes.get(pipes.size() - 1).getX() + nextPipeGapX < config.get("ScreenX")) {
-            int gapY = getNextPipeGapY(config.get("MinPipeGapY"), config.get("MaxPipeGapY"));
-            int upperY = rnd.nextInt(config.get("ScreenY") - groundHeight - gapY); // heigher than ground and leave enough space for gap
+    private void getNewPipe(int groundHeight) {
+        if (pipes.size() == 0 || pipes.get(pipes.size() - 1).getX() + nextPipeGapX < Const.screenX) {
+            int gapY = getNextPipeGapY(Const.minPipeGapY, Const.maxPipeGapY);
+            int upperY = rnd.nextInt((Const.screenY) - groundHeight - gapY); // heigher than ground and leave enough space for gap
             pipes.add(
                 new Pipe(
                     0,
-                    config.get("ScreenX"),
-                    config.get("PipeWidth"),
+                    Const.screenX,
+                    Const.pipeWidth,
                     upperY,
                     gapY,
-                    config.get("ScreenY") - groundHeight - upperY - gapY
+                    Const.screenY - groundHeight - upperY - gapY
                 )
             );
-            nextPipeGapX = getNextPipeGapX(config.get("MinPipeGapX"), config.get("MaxPipeGapX"));
+            nextPipeGapX = getNextPipeGapX(Const.minPipeGapX, Const.maxPipeGapX);
         }
     }
 
-    public void updatePipes(Map<String, Integer> config, int groundHeight) {
-        updatePipePosition(config.get("ForwardSpeed"));
+    public void updatePipes(int groundHeight) {
+        updatePipePosition(Const.forwardSpeed);
         removeOutOfBoundPipes();
-        getNewPipe(config, groundHeight);
+        getNewPipe(groundHeight);
     }
 
     public boolean isCollided(Object object) {

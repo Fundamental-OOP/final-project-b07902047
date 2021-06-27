@@ -10,9 +10,9 @@ public class Pipe {
     |  |
     |  |
     |  |
-    ---- -> upperPipeY
+    ---- -> upperPipe
 
-    ---- -> bottomPipeY
+    ---- -> bottomPipe
     |  |
     |  |
      */
