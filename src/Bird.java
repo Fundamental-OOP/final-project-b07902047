@@ -4,7 +4,7 @@ public class Bird {
     // bird type (red/green)
     private int type;
     // bird position and speed
-    private int x, y, vel;
+    private int x, y, velocity;
 
     public Bird(int initState, int totState, int type, int initX, int initY) {
         this.state = initState;
@@ -12,12 +12,12 @@ public class Bird {
         this.type = type;
         this.x = initX;
         this.y = initY;
-        this.vel = 0;
+        this.velocity = 0;
     }
 
     public int nextState() {
         state = (state + 1) % totState;
-        this.y += this.vel;
+        this.y += this.velocity;
         return state;
     }
 
@@ -29,8 +29,8 @@ public class Bird {
         this.y = y;
     }
 
-    public void setVel(int vel) {
-        this.vel = vel;
+    public void setVelocity(int velocity) {
+        this.velocity = velocity;
     }
 
     public int getX() {
@@ -49,7 +49,7 @@ public class Bird {
         return type;
     }
 
-    public int getVel() {
-        return vel;
+    public int getVelocity() {
+        return velocity;
     }
 }

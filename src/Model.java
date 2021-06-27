@@ -2,8 +2,9 @@ import events.*;
 import states.State;
 import states.StateMachine;
 import java.util.Random;
-
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Game engine that tracks the game state
@@ -17,13 +18,15 @@ public class Model extends Listener {
     Bird bird;
     ArrayList<Pipe> pipes;
     Base base;
+    Map<String, Integer> config;
 
-    public Model(EventManager eventManager) {
+    public Model(EventManager eventManager, HashMap<String, Integer> config) {
         this.name = "Model";
         this.eventManager = eventManager;
         eventManager.registerListener(this);
         this.stateMachine = new StateMachine();
         this.running = false;
+        this.config = config;
     }
 
     /**
@@ -56,7 +59,8 @@ public class Model extends Listener {
                 case STATE_MENU:
                     break;
                 case STATE_PLAY:
-                    break;
+                    bird.setY(bird.getY() + bird.getVelocity());
+                    bird.setVelocity(Math.min(bird.getVelocity(), config.get("MaxVelocity")));
                 case STATE_STOP:
                     break;
                 case STATE_DEAD:
