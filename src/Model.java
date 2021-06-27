@@ -91,6 +91,10 @@ public class Model extends Listener {
                 case STATE_STOP:
                     break;
                 case STATE_DEAD:
+                    // Fall to the ground if not already on the ground
+                    if (!ground.isCollided(bird)) {
+                        bird.setY(Const.screenY - ground.getHeight());
+                    }
                     break;
             }
         } else if (event instanceof JumpEvent) {
