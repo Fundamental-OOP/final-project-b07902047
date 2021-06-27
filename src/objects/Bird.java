@@ -1,21 +1,21 @@
-public class Bird {
-    private int width, height;
+package objects;
+
+public class Bird extends Object{
     // bird flap state (image 0/1/2/3)
     private int state, totalState;
     // bird type (red/green)
     private int type;
     // bird position and speed
-    private int x, y, velocity;
+    private int velocity;
 
-    public Bird(int initState, int totalState, int type, int initX, int initY) {
+    public Bird(int x, int y, int width, int height, int type, int initState, int totalState) {
+        super(x, y, width, height);
         this.state = initState;
         this.totalState = totalState;
         this.type = type;
-        this.x = initX;
-        this.y = initY;
+        this.x = x;
+        this.y = y;
         this.velocity = 0;
-        this.width = 34;
-        this.height = 48;
     }
 
     public int nextState() {
@@ -24,24 +24,8 @@ public class Bird {
         return state;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
     public void setVelocity(int velocity) {
         this.velocity = velocity;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
     }
 
     public int getState() {
@@ -56,11 +40,10 @@ public class Bird {
         return velocity;
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
+    // Override the object's method as we check the bird's y position cannot be negative,
+    // That is, it cannot fly INTO the sky.
+    @Override
+    public void setY(int y) {
+        this.y = Math.max(y, 0);
     }
 }
