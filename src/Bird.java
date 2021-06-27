@@ -1,22 +1,25 @@
 public class Bird {
+    private int width, height;
     // bird flap state (image 0/1/2/3)
-    private int state, totState;
+    private int state, totalState;
     // bird type (red/green)
     private int type;
     // bird position and speed
     private int x, y, velocity;
 
-    public Bird(int initState, int totState, int type, int initX, int initY) {
+    public Bird(int initState, int totalState, int type, int initX, int initY) {
         this.state = initState;
-        this.totState = totState;
+        this.totalState = totalState;
         this.type = type;
         this.x = initX;
         this.y = initY;
         this.velocity = 0;
+        this.width = 34;
+        this.height = 48;
     }
 
     public int nextState() {
-        state = (state + 1) % totState;
+        state = (state + 1) % totalState;
         this.y += this.velocity;
         return state;
     }
@@ -51,5 +54,13 @@ public class Bird {
 
     public int getVelocity() {
         return velocity;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }
