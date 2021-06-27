@@ -33,8 +33,11 @@ public class EventManager {
         if (!(event instanceof TickEvent)) {
             System.err.println(event);
         }
-        for (Listener listener : listeners) if (listener != null) {
-            listener.notifyEvent(event);
+        
+        for (Listener listener : listeners) {
+            if (listener != null) {
+                listener.notifyEvent(event);
+            }
         }
     }
 }
