@@ -1,6 +1,6 @@
 package FlappyBird.view;
 
-import FlappyBird.Config;
+import FlappyBird.Const;
 import FlappyBird.events.BaseEvent;
 import FlappyBird.events.Listener;
 import FlappyBird.events.ResetEvent;
@@ -14,14 +14,15 @@ class Renderer extends JPanel implements Listener {
 
     Background background;
 
-    Renderer(Model model, Config config) {
+    Renderer(Model model) {
         super();
 
         this.model = model;
         this.background = new Background();
 
-        setSize(config.getScreenWidth(), config.getScreenHeight());
+        setSize(Const.screenX, Const.screenY);
         setLayout(new BorderLayout());
+
         add(background);
     }
 

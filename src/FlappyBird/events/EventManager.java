@@ -31,7 +31,7 @@ public class EventManager {
      *
      * @param event event to be broadcast
      */
-    public static void postEvent(BaseEvent event) {
+    public static void post(BaseEvent event) {
         if (!(event instanceof TickEvent)) {
             System.err.println(event);
         }

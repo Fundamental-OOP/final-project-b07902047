@@ -1,6 +1,5 @@
 package FlappyBird.controller;
 
-import FlappyBird.Config;
 import FlappyBird.events.*;
 import FlappyBird.models.Model;
 
@@ -11,7 +10,7 @@ public class Controller implements Listener {
     Model model;
     private final Set<ControllerEvent> queuedEventSet = new HashSet<>();
 
-    public Controller(Model model, Config config) {
+    public Controller(Model model) {
         EventManager.registerListener(this);
         this.model = model;
     }
@@ -24,7 +23,7 @@ public class Controller implements Listener {
     }
 
     private void processTick() {
-        queuedEventSet.forEach(EventManager::postEvent);
+        queuedEventSet.forEach(EventManager::post);
         queuedEventSet.clear();
     }
 
