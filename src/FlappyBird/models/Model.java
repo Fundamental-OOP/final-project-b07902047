@@ -77,6 +77,7 @@ public class Model implements Listener {
                     }
                     ground.updateCoord();
                     bird.nextState();
+                    break;
                 case STATE_PLAY:
                     if (scoreIsUpdated()) {
                         EventManager.post(new ScoreEvent());
