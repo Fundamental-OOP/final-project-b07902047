@@ -91,9 +91,9 @@ public class Model extends Listener {
                 case STATE_STOP:
                     break;
                 case STATE_DEAD:
-                    // Fall to the ground with max speed until hit the ground
+                    // Fall to the ground with max speed until it hits the ground
                     if (!ground.isCollided(bird)) {
-                        bird.setVelocity(Const.birdMaxVelocity);
+                        bird.setY(Math.min(bird.getY() + Const.birdMaxVelocity, Const.screenY - ground.getHeight()));
                         bird.nextState();
                     }
                     break;
