@@ -17,7 +17,7 @@ public class Model extends Listener {
     EventManager eventManager;
     StateMachine stateMachine;
     boolean running;
-    Random rnd;
+    Random rnd = new Random();
 
     Bird bird;
     ArrayList<Pipe> pipes;
