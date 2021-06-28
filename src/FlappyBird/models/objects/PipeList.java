@@ -1,6 +1,6 @@
-package objects;
+package FlappyBird.models.objects;
 
-import constants.Const;
+import FlappyBird.Const;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;

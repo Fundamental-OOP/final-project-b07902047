@@ -1,4 +1,4 @@
-package objects;
+package FlappyBird.models.objects;
 
 public class Bird extends Object{
     // bird flap state (image 0/1/2/3)

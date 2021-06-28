@@ -1,4 +1,4 @@
-package objects;
+package FlappyBird.models.objects;
 import java.awt.Rectangle;
 
 public class Object {

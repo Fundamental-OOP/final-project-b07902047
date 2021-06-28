@@ -1,4 +1,4 @@
-package events;
+package FlappyBird.events;
 
 public class HitEvent extends BaseEvent {
     public HitEvent() {

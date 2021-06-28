@@ -1,4 +1,4 @@
-package objects;
+package FlappyBird.models.objects;
 
 public class Pipe {
     private int type;

@@ -1,6 +1,6 @@
-package objects;
+package FlappyBird.models.objects;
 
-import constants.Const;
+import FlappyBird.Const;
 
 public class Ground extends Object {
     public Ground(int x, int y, int width, int height) {

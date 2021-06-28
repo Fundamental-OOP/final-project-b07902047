@@ -1,30 +1,30 @@
-import events.*;
-import objects.Ground;
-import objects.Bird;
-import objects.PipeList;
-import constants.Const;
-import states.State;
-import states.StateMachine;
+package FlappyBird.models;
+
+import FlappyBird.events.*;
+import FlappyBird.states.State;
+import FlappyBird.states.StateMachine;
 import java.util.Random;
+
+import FlappyBird.models.objects.Ground;
+import FlappyBird.models.objects.Bird;
+import FlappyBird.models.objects.PipeList;
+import FlappyBird.Const;
 
 /**
  * Game engine that tracks the game state
  */
-public class Model extends Listener {
-    EventManager eventManager;
+public class Model implements Listener {
     StateMachine stateMachine;
     boolean running;
-    Random rnd;
+    Random rnd = new Random();
     int score;
 
     Bird bird;
-    PipeList pipeList;
+    PipeList pipeList = new PipeList();
     Ground ground;
 
-    public Model(EventManager eventManager) {
-        this.name = "Model";
-        this.eventManager = eventManager;
-        eventManager.registerListener(this);
+    public Model() {
+        EventManager.registerListener(this);
         this.stateMachine = new StateMachine();
         this.running = false;
     }
@@ -34,21 +34,25 @@ public class Model extends Listener {
      */
     public void run() {
         this.running = true;
-        this.eventManager.post(new InitializeEvent());
+        EventManager.post(new InitializeEvent());
         this.stateMachine.push(State.STATE_MENU);
 
         while (this.running) {
-            this.eventManager.post(new TickEvent());
+            EventManager.post(new TickEvent());
+
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException ignored) { }
         }
     }
 
     @Override
-    void notifyEvent(BaseEvent event) {
+    public void onEvent(BaseEvent event) {
         if (event instanceof StateChangeEvent) {
             StateChangeEvent stateChangeEvent = (StateChangeEvent)event;
             if (stateChangeEvent.getState() == null) {
                 if (this.stateMachine.pop() == null) {
-                    this.eventManager.post(new QuitEvent());
+                    EventManager.post(new QuitEvent());
                 }
             } else {
                 this.stateMachine.push(stateChangeEvent.getState());
@@ -69,12 +73,14 @@ public class Model extends Listener {
                     if (Math.abs(deltaY) >= boundary) {
                         // If the bird has moved out of the boundary, change the direction.
                         directionAndScale *= -1.0;
+                        // TODO: this variable set but not used
                     }
                     ground.updateCoord();
                     bird.nextState();
+                    break;
                 case STATE_PLAY:
                     if (scoreIsUpdated()) {
-                        eventManager.post(new ScoreEvent());
+                        EventManager.post(new ScoreEvent());
                     }
                     bird.setY(bird.getY() + bird.getVelocity());
                     bird.setVelocity(Math.min(bird.getVelocity() + 1, Const.birdMaxVelocity));
@@ -83,9 +89,9 @@ public class Model extends Listener {
                     pipeList.updatePipes(ground.getHeight());
 
                     if (isCrashed()) {
-                        eventManager.post(new HitEvent());
-                        eventManager.post(new StateChangeEvent(null));
-                        eventManager.post(new StateChangeEvent(State.STATE_DEAD));
+                        EventManager.post(new HitEvent());
+                        EventManager.post(new StateChangeEvent(null));
+                        EventManager.post(new StateChangeEvent(State.STATE_DEAD));
                     }
                     break;
                 case STATE_STOP:
