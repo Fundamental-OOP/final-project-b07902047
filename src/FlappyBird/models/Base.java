@@ -1,3 +1,5 @@
+package FlappyBird.models;
+
 public class Base {
     private int x, y;
 

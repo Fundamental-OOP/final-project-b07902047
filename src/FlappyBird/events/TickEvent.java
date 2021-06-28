@@ -1,4 +1,4 @@
-package events;
+package FlappyBird.events;
 
 public class TickEvent extends BaseEvent {
     public TickEvent() {

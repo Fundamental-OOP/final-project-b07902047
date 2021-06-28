@@ -1,6 +1,8 @@
+package FlappyBird.models;
+
 public class Pipe {
     private int type;
-    // x is not important, should be calculated by View
+    // x is not important, should be calculated by FlappyBird.view.View
     private int upperPipeY, bottomPipeY; // x is not important
     /*
     |  |

@@ -1,42 +1,44 @@
-import events.BaseEvent;
-import events.TickEvent;
+package FlappyBird.events;
 
 import java.util.ArrayList;
 
 /**
- * Coordinate communication between the Model, View, and Controller.
+ * Coordinate communication between the FlappyBird.models.Model, FlappyBird.view.View, and FlappyBird.controller.Controller.
  */
 public class EventManager {
-    ArrayList<Listener> listeners;
+    private final ArrayList<Listener> listeners = new ArrayList<>();
 
     /**
-     * Adds a listener to our list. It will receive events through its notifyEvent(event) call.
+     * Adds a listener to our list. It will receive FlappyBird.events through its notifyEvent(event) call.
+     *
      * @param listener listener to add
      */
-    void registerListener(Listener listener) {
+    public void registerListener(Listener listener) {
         this.listeners.add(listener);
     }
 
     /**
      * Remove a listener from our list.
+     *
      * @param listener listener to remove
      */
-    void unregisterListerner(Listener listener) {
+    public void unregisterListener(Listener listener) {
         this.listeners.remove(listener);
     }
 
     /**
      * Post a new event to all listeners
+     *
      * @param event event to be broadcast
      */
-    void post(BaseEvent event) {
+    public void postEvent(BaseEvent event) {
         if (!(event instanceof TickEvent)) {
             System.err.println(event);
         }
-        
+
         for (Listener listener : listeners) {
             if (listener != null) {
-                listener.notifyEvent(event);
+                listener.onEvent(event);
             }
         }
     }

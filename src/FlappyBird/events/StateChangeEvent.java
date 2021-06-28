@@ -1,6 +1,6 @@
-package events;
+package FlappyBird.events;
 
-import states.State;
+import FlappyBird.states.State;
 
 public class StateChangeEvent extends BaseEvent {
     State state;

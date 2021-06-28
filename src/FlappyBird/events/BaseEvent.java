@@ -1,4 +1,4 @@
-package events;
+package FlappyBird.events;
 
 public abstract class BaseEvent {
     String name;

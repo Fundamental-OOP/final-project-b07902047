@@ -1,3 +1,5 @@
+package FlappyBird.models;
+
 public class Bird {
     // bird flap state (image 0/1/2/3)
     private int state, totState;

@@ -1,9 +1,13 @@
-import events.*;
-import states.State;
-import states.StateMachine;
+package FlappyBird.models;
+
+import FlappyBird.Config;
+import FlappyBird.events.EventManager;
+import FlappyBird.events.Listener;
+import FlappyBird.events.*;
+import FlappyBird.states.State;
+import FlappyBird.states.StateMachine;
 import java.util.Random;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -18,10 +22,10 @@ public class Model extends Listener {
     Bird bird;
     ArrayList<Pipe> pipes;
     Base base;
-    Map<String, Integer> config;
+    Config config;
 
-    public Model(EventManager eventManager, HashMap<String, Integer> config) {
-        this.name = "Model";
+    public Model(EventManager eventManager, Config config) {
+        this.name = "FlappyBird.models.Model";
         this.eventManager = eventManager;
         eventManager.registerListener(this);
         this.stateMachine = new StateMachine();
@@ -34,21 +38,21 @@ public class Model extends Listener {
      */
     public void run() {
         this.running = true;
-        this.eventManager.post(new InitializeEvent());
+        this.eventManager.postEvent(new InitializeEvent());
         this.stateMachine.push(State.STATE_MENU);
 
         while (this.running) {
-            this.eventManager.post(new TickEvent());
+            this.eventManager.postEvent(new TickEvent());
         }
     }
 
     @Override
-    void notifyEvent(BaseEvent event) {
+    protected void onEvent(BaseEvent event) {
         if (event instanceof StateChangeEvent) {
             StateChangeEvent stateChangeEvent = (StateChangeEvent)event;
             if (stateChangeEvent.getState() == null) {
                 if (this.stateMachine.pop() == null) {
-                    this.eventManager.post(new QuitEvent());
+                    this.eventManager.postEvent(new QuitEvent());
                 }
             } else {
                 this.stateMachine.push(stateChangeEvent.getState());
@@ -60,7 +64,7 @@ public class Model extends Listener {
                     break;
                 case STATE_PLAY:
                     bird.setY(bird.getY() + bird.getVelocity());
-                    bird.setVelocity(Math.min(bird.getVelocity(), config.get("MaxVelocity")));
+                    bird.setVelocity(Math.min(bird.getVelocity(), config.getMaxVelocity()));
                 case STATE_STOP:
                     break;
                 case STATE_DEAD:
@@ -80,6 +84,6 @@ public class Model extends Listener {
     private void initialize() {
         this.bird = new Bird(0, 4, rnd.nextInt() % 2, 40, 244);
         this.pipes = new ArrayList<Pipe>();
-        this.base = new Base(0, (int)(Const.mainConst.ScreenSize[0] * 0.8));
+        this.base = new Base(0, (int)(config.getScreenWidth() * 0.8));
     }
 }
