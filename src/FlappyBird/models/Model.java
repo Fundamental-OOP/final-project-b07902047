@@ -13,8 +13,7 @@ import java.util.Map;
 /**
  * Game engine that tracks the game state
  */
-public class Model extends Listener {
-    EventManager eventManager;
+public class Model implements Listener {
     StateMachine stateMachine;
     boolean running;
     Random rnd = new Random();
@@ -24,10 +23,8 @@ public class Model extends Listener {
     Base base;
     Config config;
 
-    public Model(EventManager eventManager, Config config) {
-        this.name = "FlappyBird.models.Model";
-        this.eventManager = eventManager;
-        eventManager.registerListener(this);
+    public Model(Config config) {
+        EventManager.registerListener(this);
         this.stateMachine = new StateMachine();
         this.running = false;
         this.config = config;
@@ -38,21 +35,25 @@ public class Model extends Listener {
      */
     public void run() {
         this.running = true;
-        this.eventManager.postEvent(new InitializeEvent());
+        EventManager.postEvent(new InitializeEvent());
         this.stateMachine.push(State.STATE_MENU);
 
         while (this.running) {
-            this.eventManager.postEvent(new TickEvent());
+            EventManager.postEvent(new TickEvent());
+
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException ignored) { }
         }
     }
 
     @Override
-    protected void onEvent(BaseEvent event) {
+    public void onEvent(BaseEvent event) {
         if (event instanceof StateChangeEvent) {
             StateChangeEvent stateChangeEvent = (StateChangeEvent)event;
             if (stateChangeEvent.getState() == null) {
                 if (this.stateMachine.pop() == null) {
-                    this.eventManager.postEvent(new QuitEvent());
+                    EventManager.postEvent(new QuitEvent());
                 }
             } else {
                 this.stateMachine.push(stateChangeEvent.getState());
@@ -79,6 +80,10 @@ public class Model extends Listener {
         } else if (event instanceof QuitEvent) {
             this.running = false;
         }
+    }
+
+    public State getState() {
+        return stateMachine.peek();
     }
 
     private void initialize() {
