@@ -42,10 +42,10 @@ public class PipeList {
         }
     }
 
-    private void getNewPipe(int groundHeight) {
+    private void getNewPipe(int groundY) {
         if (pipes.size() == 0 || pipes.get(pipes.size() - 1).getX() + nextPipeGapX < Const.screenX) {
             int gapY = getNextPipeGapY(Const.minPipeGapY, Const.maxPipeGapY);
-            int upperY = rnd.nextInt((Const.screenY) - groundHeight - gapY); // heigher than ground and leave enough space for gap
+            int upperY = rnd.nextInt(groundY - gapY); // heigher than ground and leave enough space for gap
             pipes.add(
                 new Pipe(
                     0,
@@ -53,17 +53,17 @@ public class PipeList {
                     Const.pipeWidth,
                     upperY,
                     gapY,
-                    Const.screenY - groundHeight - upperY - gapY
+                    groundY - upperY - gapY
                 )
             );
             nextPipeGapX = getNextPipeGapX(Const.minPipeGapX, Const.maxPipeGapX);
         }
     }
 
-    public void updatePipes(int groundHeight) {
+    public void updatePipes(int groundY) {
         updatePipePosition(Const.forwardSpeed);
         removeOutOfBoundPipes();
-        getNewPipe(groundHeight);
+        getNewPipe(groundY);
     }
 
     public boolean isCollided(Object object) {

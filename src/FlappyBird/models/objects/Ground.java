@@ -7,7 +7,7 @@ public class Ground extends Object {
         super(x, y, width, height);
     }
 
-    public void updateCoord() {
+    public void updatePosition() {
         x = (x - Const.forwardSpeed + width) % width;
     }
 }
