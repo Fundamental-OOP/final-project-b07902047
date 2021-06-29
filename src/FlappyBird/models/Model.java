@@ -23,7 +23,7 @@ public class Model implements Listener {
     private Bird bird;
     private Ground ground;
     private PipeList pipeList;
-    private BackgroundColor backgroundColor;
+    private BackgroundTheme backgroundTheme;
 
     public Model() {
         EventManager.registerListener(this);
@@ -100,8 +100,8 @@ public class Model implements Listener {
         return score;
     }
 
-    public BackgroundColor getBackgroundColor() {
-        return backgroundColor;
+    public BackgroundTheme getBackgroundTheme() {
+        return backgroundTheme;
     }
 
     private void initialize() {
@@ -123,8 +123,8 @@ public class Model implements Listener {
         this.pipeList = new PipeList(ground.getY());
         this.running = true;
         this.score = 0;
-        // Randomly pick a background color
-        this.backgroundColor = BackgroundColor.values()[rnd.nextInt(BackgroundColor.values().length)];
+        // Randomly pick a background theme
+        this.backgroundTheme = BackgroundTheme.values()[rnd.nextInt(BackgroundTheme.values().length)];
     }
 
     public State getState() {
