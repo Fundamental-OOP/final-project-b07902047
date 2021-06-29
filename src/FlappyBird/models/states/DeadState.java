@@ -9,11 +9,4 @@ public class DeadState extends State {
     public DeadState() {
         super("Dead");
     }
-
-    @Override
-    public void runTick(Model model) {
-        for (Object object : model.getObjects()) {
-            object.actToState(model, this);
-        }
-    }
 }
