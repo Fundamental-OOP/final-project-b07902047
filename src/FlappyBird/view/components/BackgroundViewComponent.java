@@ -1,5 +1,6 @@
 package FlappyBird.view.components;
 
+import FlappyBird.Const;
 import FlappyBird.events.BaseEvent;
 import FlappyBird.events.InitializeEvent;
 import FlappyBird.models.Model;
@@ -38,6 +39,6 @@ public class BackgroundViewComponent implements ViewComponent {
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(currentImage, 0, 0, null);
+        g.drawImage(currentImage, 0, 0, Const.screenX, Const.screenY, null);
     }
 }

@@ -29,6 +29,6 @@ public class GroundViewComponent implements ViewComponent {
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(image, 0, 400, null);
+        g.drawImage(image, 0, 400, 336, 112, null);
     }
 }
