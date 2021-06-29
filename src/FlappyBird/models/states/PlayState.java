@@ -4,13 +4,13 @@ import FlappyBird.events.*;
 import FlappyBird.models.Model;
 import FlappyBird.models.objects.*;
 
-public class Play extends State {
-    public Play() {
+public class PlayState extends State {
+    public PlayState() {
         super("Play");
     }
 
     @Override
-    public void action(Model model) {
+    public void runTick(Model model) {
         if (model.scoreIsUpdated()) {
             EventManager.post(new ScoreEvent());
         }
@@ -23,12 +23,12 @@ public class Play extends State {
         bird.speedUp();
         ground.updatePosition();
         bird.nextState();
-        pipeList.updatePipes(ground.getY());
+        pipeList.updatePipes();
 
         if (model.isCrashed()) {
             EventManager.post(new HitEvent());
             EventManager.post(new StateChangeEvent(null));
-            EventManager.post(new StateChangeEvent(new Dead()));
+            EventManager.post(new StateChangeEvent(new DeadState()));
         }
     }
 }

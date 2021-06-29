@@ -3,7 +3,7 @@ package FlappyBird.models.states;
 import FlappyBird.models.Model;
 import FlappyBird.models.objects.*;
 
-public class Menu extends State {
+public class MenuState extends State {
     // When displaying the menu, make the bird move around a little
     // The bird will only move between [initY - boundary, initY + boundary]
     private int boundary;
@@ -13,7 +13,7 @@ public class Menu extends State {
     // The distance of movement.
     private int deltaY;
 
-    public Menu() {
+    public MenuState() {
         super("Menu");
         boundary = 16;
         directionAndScale = 0.5;
@@ -21,7 +21,7 @@ public class Menu extends State {
     }
 
     @Override
-    public void action(Model model) {
+    public void runTick(Model model) {
         Bird bird = model.getBird();
         Ground ground = model.getGround();
 

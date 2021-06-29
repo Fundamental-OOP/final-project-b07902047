@@ -2,13 +2,13 @@ package FlappyBird.models.states;
 
 import FlappyBird.models.Model;
 
-public class Stop extends State {
-    public Stop() {
+public class StopState extends State {
+    public StopState() {
         super("Stop");
     }
 
     @Override
-    public void action(Model model) {
+    public void runTick(Model model) {
         // Do nothing when stopped
     }
 }
