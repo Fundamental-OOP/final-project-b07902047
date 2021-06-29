@@ -42,8 +42,7 @@ public class Model implements Listener {
 
             try {
                 Thread.sleep(50);
-            } catch (InterruptedException ignored) {
-            }
+            } catch (InterruptedException ignored) { }
         }
     }
 
@@ -148,5 +147,4 @@ public class Model implements Listener {
     public State getState() {
         return stateMachine.peek();
     }
-
 }

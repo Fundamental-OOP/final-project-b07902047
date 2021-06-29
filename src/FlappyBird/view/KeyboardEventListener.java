@@ -7,23 +7,17 @@ import FlappyBird.states.State;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.List;
+import FlappyBird.events.JumpEvent;
+import FlappyBird.events.QuitEvent;
+
 
 public class KeyboardEventListener implements KeyListener {
     private Controller controller;
     private Model model;
 
-    public KeyboardEventListener() {
-    }
-
     public KeyboardEventListener(Controller controller, Model model) {
         this.controller = controller;
         this.model = model;
-    }
-
-    KeyboardEventListener setController(Controller controller) {
-        this.controller = controller;
-        return this;
     }
 
     @Override
