@@ -1,4 +1,5 @@
 package FlappyBird;
+
 public final class Const {
     private Const() {} // Avoid others from initializing this class
     public static final int screenX = 288;

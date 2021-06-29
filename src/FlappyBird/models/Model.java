@@ -13,6 +13,7 @@ import FlappyBird.models.states.StateMachine;
 /**
  * Game engine that tracks the game state
  */
+
 public class Model implements Listener {
     private StateMachine stateMachine;
     private boolean running;
@@ -22,6 +23,7 @@ public class Model implements Listener {
     private Bird bird;
     private Ground ground;
     private PipeList pipeList;
+    private BackgroundTheme backgroundTheme;
 
     public Model() {
         EventManager.registerListener(this);
@@ -98,6 +100,10 @@ public class Model implements Listener {
         return score;
     }
 
+    public BackgroundTheme getBackgroundTheme() {
+        return backgroundTheme;
+    }
+
     private void initialize() {
         this.bird = new Bird(
                 Const.birdInitX,
@@ -117,6 +123,8 @@ public class Model implements Listener {
         this.pipeList = new PipeList(ground.getY());
         this.running = true;
         this.score = 0;
+        // Randomly pick a background theme
+        this.backgroundTheme = BackgroundTheme.values()[rnd.nextInt(BackgroundTheme.values().length)];
     }
 
     public State getState() {
