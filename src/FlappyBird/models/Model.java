@@ -1,14 +1,14 @@
 package FlappyBird.models;
 
+import FlappyBird.Const;
 import FlappyBird.events.*;
+import FlappyBird.models.objects.Bird;
+import FlappyBird.models.objects.Ground;
+import FlappyBird.models.objects.PipeList;
 import FlappyBird.states.State;
 import FlappyBird.states.StateMachine;
-import java.util.Random;
 
-import FlappyBird.models.objects.Ground;
-import FlappyBird.models.objects.Bird;
-import FlappyBird.models.objects.PipeList;
-import FlappyBird.Const;
+import java.util.Random;
 
 /**
  * Game engine that tracks the game state
@@ -49,7 +49,7 @@ public class Model implements Listener {
     @Override
     public void onEvent(BaseEvent event) {
         if (event instanceof StateChangeEvent) {
-            StateChangeEvent stateChangeEvent = (StateChangeEvent)event;
+            StateChangeEvent stateChangeEvent = (StateChangeEvent) event;
             if (stateChangeEvent.getState() == null) {
                 if (this.stateMachine.pop() == null) {
                     EventManager.post(new QuitEvent());
@@ -66,9 +66,9 @@ public class Model implements Listener {
                     int boundary = 16;
                     // The direction the bird is flying towards. Positive for downward and negative for upward.
                     // Using only 0.5 of its normal velocity to fly a little slower.
-                    double directionAndScale = 0.5; 
+                    double directionAndScale = 0.5;
                     // The distance of movement.
-                    int deltaY = (int)(directionAndScale * bird.getVelocity());
+                    int deltaY = (int) (directionAndScale * bird.getVelocity());
                     bird.setY(bird.getY() + deltaY);
                     if (Math.abs(deltaY) >= boundary) {
                         // If the bird has moved out of the boundary, change the direction.
@@ -127,20 +127,24 @@ public class Model implements Listener {
 
     private void initialize() {
         this.bird = new Bird(
-            Const.birdInitX,
-            Const.birdInitY,
-            Const.birdWidth,
-            Const.birdHeight,
-            0,
-            rnd.nextInt(2),
-            4
+                Const.birdInitX,
+                Const.birdInitY,
+                Const.birdWidth,
+                Const.birdHeight,
+                0,
+                rnd.nextInt(2),
+                4
         );
         this.ground = new Ground(
-            0,
-            (int)Math.round(Const.screenY * 0.8),
-            Const.screenX,
-            (int)Math.round(Const.screenY * 0.2)
+                0,
+                (int) Math.round(Const.screenY * 0.8),
+                Const.screenX,
+                (int) Math.round(Const.screenY * 0.2)
         );
         this.score = 0;
+    }
+
+    public State getState() {
+        return stateMachine.peek();
     }
 }

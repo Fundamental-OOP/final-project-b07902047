@@ -35,10 +35,10 @@ public class View implements Listener {
         jFrame.setSize(Const.screenX, Const.screenY);
         jFrame.setResizable(false);
         jFrame.setVisible(true);
-        jFrame.addKeyListener(new KeyboardEventListener(controller));
+        jFrame.addKeyListener(new KeyboardEventListener(controller, model));
 
         renderer = new Renderer(model);
-        renderer.addViewComponent(new BackgroundViewComponent());
+        renderer.addViewComponent(new BackgroundViewComponent(/* model */));
         renderer.addViewComponent(new GroundViewComponent(/* model */));
 
         jFrame.add(renderer);

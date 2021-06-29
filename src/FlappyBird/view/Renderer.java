@@ -1,28 +1,19 @@
 package FlappyBird.view;
 
 import FlappyBird.Const;
-import FlappyBird.events.BaseEvent;
-import FlappyBird.events.EventManager;
-import FlappyBird.events.Listener;
-import FlappyBird.events.ResetEvent;
+import FlappyBird.events.*;
 import FlappyBird.models.Model;
-import FlappyBird.view.components.BackgroundViewComponent;
-import FlappyBird.view.components.GroundViewComponent;
-import FlappyBird.view.components.ViewComponent;
+import FlappyBird.view.components.*;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
+
+
 class Renderer extends JPanel {
     Model model;
-
-    BackgroundViewComponent background;
-    GroundViewComponent ground;
 
     final private List<ViewComponent> components = new ArrayList<>();
 

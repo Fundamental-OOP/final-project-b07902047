@@ -2,7 +2,7 @@ package FlappyBird.events;
 
 import FlappyBird.states.State;
 
-public class StateChangeEvent extends BaseEvent {
+public class StateChangeEvent extends ControllerEvent {
     State state;
 
     public StateChangeEvent(State state) {
