@@ -1,6 +1,7 @@
 package FlappyBird.models.states;
 
 import FlappyBird.models.Model;
+import FlappyBird.models.objects.Object;
 
 public class StopState extends State {
     public StopState() {
@@ -9,6 +10,8 @@ public class StopState extends State {
 
     @Override
     public void runTick(Model model) {
-        // Do nothing when stopped
+        for (Object object : model.getObjects()) {
+            object.actToState(model, this);
+        }
     }
 }
