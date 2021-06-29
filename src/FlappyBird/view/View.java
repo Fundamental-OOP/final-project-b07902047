@@ -6,6 +6,8 @@ import FlappyBird.events.EventManager;
 import FlappyBird.events.Listener;
 import FlappyBird.events.*;
 import FlappyBird.models.Model;
+import FlappyBird.view.components.BackgroundViewComponent;
+import FlappyBird.view.components.GroundViewComponent;
 
 import javax.swing.JFrame;
 
@@ -28,13 +30,16 @@ public class View implements Listener {
     }
 
     public View initialize() {
-        renderer = new Renderer(model);
         jFrame = new JFrame("Flappy Bird");
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setSize(Const.screenX, Const.screenY);
         jFrame.setResizable(false);
         jFrame.setVisible(true);
         jFrame.addKeyListener(new KeyboardEventListener(controller));
+
+        renderer = new Renderer(model);
+        renderer.addViewComponent(new BackgroundViewComponent());
+        renderer.addViewComponent(new GroundViewComponent(/* model */));
 
         jFrame.add(renderer);
 
