@@ -34,7 +34,7 @@ public class View implements Listener {
         jFrame.setSize(Const.screenX, Const.screenY);
         jFrame.setResizable(false);
         jFrame.setVisible(true);
-        jFrame.addKeyListener(new KeyboardEventListener(controller));
+        jFrame.addKeyListener(new KeyboardEventListener(controller,model));
 
         jFrame.add(renderer);
 
