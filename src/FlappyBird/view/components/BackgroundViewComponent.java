@@ -1,5 +1,9 @@
 package FlappyBird.view.components;
 
+import FlappyBird.events.BaseEvent;
+import FlappyBird.events.InitializeEvent;
+import FlappyBird.models.Model;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
@@ -22,21 +26,14 @@ public class BackgroundViewComponent implements ViewComponent {
         randomChangeImage();
     }
 
-    void print(Graphics g) {
-//        g.drawImage(currentImage, 0, 0, this);
-    }
-
     public void randomChangeImage() {
         int imageIndex = random.nextInt(backgroundImages.size());
         String imageFile = pathToImageDir + backgroundImages.get(imageIndex);
-        System.out.println(new File(imageFile).exists());
-        // currentImage = getToolkit().getImage(imageFile);
         try {
             currentImage = ImageIO.read(new File(imageFile));
         } catch (IOException e) {
             throw new RuntimeException();
         }
-//        repaint();
     }
 
     @Override

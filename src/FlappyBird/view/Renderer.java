@@ -2,6 +2,7 @@ package FlappyBird.view;
 
 import FlappyBird.Const;
 import FlappyBird.events.BaseEvent;
+import FlappyBird.events.EventManager;
 import FlappyBird.events.Listener;
 import FlappyBird.events.ResetEvent;
 import FlappyBird.models.Model;
@@ -17,7 +18,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
-class Renderer extends JPanel implements Listener {
+class Renderer extends JPanel {
     Model model;
 
     BackgroundViewComponent background;
@@ -29,14 +30,17 @@ class Renderer extends JPanel implements Listener {
         super();
 
         this.model = model;
-        background = new BackgroundViewComponent();
-        ground = new GroundViewComponent(/* model.getGround() */);
 
         setSize(Const.screenX, Const.screenY);
         setLayout(new BorderLayout());
+    }
 
-        components.add(background);
-        components.add(ground);
+    public void addViewComponent(ViewComponent component) {
+        components.add(component);
+    }
+
+    public void removeViewComponent(ViewComponent component) {
+        components.remove(component);
     }
 
     public void render() {
@@ -48,12 +52,5 @@ class Renderer extends JPanel implements Listener {
         super.paintComponent(g);
 
         components.forEach(components -> components.paint(g));
-    }
-
-    @Override
-    public void onEvent(BaseEvent event) {
-        if (event instanceof ResetEvent) {
-            background.randomChangeImage();
-        }
     }
 }

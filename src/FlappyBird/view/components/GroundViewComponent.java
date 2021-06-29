@@ -1,9 +1,9 @@
 package FlappyBird.view.components;
 
+import FlappyBird.events.BaseEvent;
 import FlappyBird.models.objects.Ground;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
