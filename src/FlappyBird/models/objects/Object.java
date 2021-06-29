@@ -1,4 +1,7 @@
 package FlappyBird.models.objects;
+
+import FlappyBird.models.states.State;
+
 import java.awt.Rectangle;
 
 public class Object {
@@ -46,5 +49,9 @@ public class Object {
         Rectangle selfRectangle = getRectangle();
         Rectangle otherRectangle = other.getRectangle();
         return selfRectangle.intersects(otherRectangle);
+    }
+
+    public void actToState(State state) {
+        // Change self's position in different state.
     }
 }

@@ -1,5 +1,7 @@
 package FlappyBird.models.objects;
 
+import FlappyBird.Const;
+
 public class Bird extends Object{
     // bird flap state (image 0/1/2/3)
     private int state, totalState;
@@ -20,12 +22,12 @@ public class Bird extends Object{
 
     public int nextState() {
         state = (state + 1) % totalState;
-        this.y += this.velocity;
         return state;
     }
 
     public void setVelocity(int velocity) {
         this.velocity = velocity;
+        this.velocity = Math.min(this.velocity, Const.birdMaxVelocity);
     }
 
     public int getState() {
@@ -40,10 +42,19 @@ public class Bird extends Object{
         return velocity;
     }
 
-    // Override the object's method as we check the bird's y position cannot be negative,
-    // That is, it cannot fly INTO the sky.
-    @Override
+    public void speedUp() {
+        setVelocity(velocity + 1);
+    }
+
+    public void updatePosition(int groundY) {
+        y += this.velocity;
+        // The bird's y position cannot be greater than groundY. That is, it cannot fall UNDER the ground.
+        y = Math.min(groundY, y);
+        // The bird's y position cannot be negative. That is, it cannot fly INTO the sky.
+        y = Math.max(0, y);
+    }
+
     public void setY(int y) {
-        this.y = Math.max(y, 0);
+        this.y = y;
     }
 }

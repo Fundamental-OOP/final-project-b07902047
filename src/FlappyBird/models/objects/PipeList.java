@@ -8,11 +8,13 @@ import java.util.Random;
 public class PipeList {
     private List<Pipe> pipes;
     private int nextPipeGapX;
+    private int groundY;
     private Random rnd;
 
-    public PipeList() {
+    public PipeList(int groundY) {
         pipes = new ArrayList<Pipe>();
         nextPipeGapX = 100; // The first pipe will be 100 distance away
+        this.groundY = groundY; // The y coordinate of the ground. Pipes should be above it.
         rnd = new Random();
     }
 
@@ -42,10 +44,10 @@ public class PipeList {
         }
     }
 
-    private void getNewPipe(int groundHeight) {
+    private void getNewPipe() {
         if (pipes.size() == 0 || pipes.get(pipes.size() - 1).getX() + nextPipeGapX < Const.screenX) {
             int gapY = getNextPipeGapY(Const.minPipeGapY, Const.maxPipeGapY);
-            int upperY = rnd.nextInt((Const.screenY) - groundHeight - gapY); // heigher than ground and leave enough space for gap
+            int upperY = rnd.nextInt(groundY - gapY); // heigher than ground and leave enough space for gap
             pipes.add(
                 new Pipe(
                     0,
@@ -53,17 +55,17 @@ public class PipeList {
                     Const.pipeWidth,
                     upperY,
                     gapY,
-                    Const.screenY - groundHeight - upperY - gapY
+                    groundY - upperY - gapY
                 )
             );
             nextPipeGapX = getNextPipeGapX(Const.minPipeGapX, Const.maxPipeGapX);
         }
     }
 
-    public void updatePipes(int groundHeight) {
+    public void updatePipes() {
         updatePipePosition(Const.forwardSpeed);
         removeOutOfBoundPipes();
-        getNewPipe(groundHeight);
+        getNewPipe();
     }
 
     public boolean isCollided(Object object) {

@@ -1,4 +1,4 @@
-package FlappyBird.states;
+package FlappyBird.models.states;
 
 import java.util.ArrayList;
 

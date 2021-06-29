@@ -1,30 +1,31 @@
 package FlappyBird.models;
 
+import java.util.Random;
 import FlappyBird.Const;
 import FlappyBird.events.*;
 import FlappyBird.models.objects.Bird;
 import FlappyBird.models.objects.Ground;
 import FlappyBird.models.objects.PipeList;
-import FlappyBird.states.State;
-import FlappyBird.states.StateMachine;
-
-import java.util.Random;
+import FlappyBird.models.states.MenuState;
+import FlappyBird.models.states.State;
+import FlappyBird.models.states.StateMachine;
 
 /**
  * Game engine that tracks the game state
  */
 public class Model implements Listener {
-    StateMachine stateMachine;
-    boolean running;
-    Random rnd = new Random();
-    int score;
+    private StateMachine stateMachine;
+    private boolean running;
+    private Random rnd;
+    private int score;
 
-    Bird bird;
-    PipeList pipeList = new PipeList();
-    Ground ground;
+    private Bird bird;
+    private Ground ground;
+    private PipeList pipeList;
 
     public Model() {
         EventManager.registerListener(this);
+        rnd = new Random();
         this.stateMachine = new StateMachine();
         this.running = false;
     }
@@ -35,7 +36,7 @@ public class Model implements Listener {
     public void run() {
         this.running = true;
         EventManager.post(new InitializeEvent());
-        this.stateMachine.push(State.STATE_MENU);
+        this.stateMachine.push(new MenuState());
 
         while (this.running) {
             EventManager.post(new TickEvent());
@@ -59,51 +60,7 @@ public class Model implements Listener {
             }
         } else if (event instanceof TickEvent) {
             State curState = this.stateMachine.peek();
-            switch (curState) {
-                case STATE_MENU:
-                    // When displaying the menu, make the bird move around a little
-                    // The bird will only move between [initY - boundary, initY + boundary]
-                    int boundary = 16;
-                    // The direction the bird is flying towards. Positive for downward and negative for upward.
-                    // Using only 0.5 of its normal velocity to fly a little slower.
-                    double directionAndScale = 0.5;
-                    // The distance of movement.
-                    int deltaY = (int) (directionAndScale * bird.getVelocity());
-                    bird.setY(bird.getY() + deltaY);
-                    if (Math.abs(deltaY) >= boundary) {
-                        // If the bird has moved out of the boundary, change the direction.
-                        directionAndScale *= -1.0;
-                        // TODO: this variable set but not used
-                    }
-                    ground.updateCoord();
-                    bird.nextState();
-                    break;
-                case STATE_PLAY:
-                    if (scoreIsUpdated()) {
-                        EventManager.post(new ScoreEvent());
-                    }
-                    bird.setY(bird.getY() + bird.getVelocity());
-                    bird.setVelocity(Math.min(bird.getVelocity() + 1, Const.birdMaxVelocity));
-                    ground.updateCoord();
-                    bird.nextState();
-                    pipeList.updatePipes(ground.getHeight());
-
-                    if (isCrashed()) {
-                        EventManager.post(new HitEvent());
-                        EventManager.post(new StateChangeEvent(null));
-                        EventManager.post(new StateChangeEvent(State.STATE_DEAD));
-                    }
-                    break;
-                case STATE_STOP:
-                    break;
-                case STATE_DEAD:
-                    // Fall to the ground with max speed until it hits the ground
-                    if (!ground.isCollided(bird)) {
-                        bird.setY(Math.min(bird.getY() + Const.birdMaxVelocity, Const.screenY - ground.getHeight()));
-                        bird.nextState();
-                    }
-                    break;
-            }
+            curState.runTick(this);
         } else if (event instanceof JumpEvent) {
             bird.setVelocity(Const.birdFlapVelocity);
         } else if (event instanceof InitializeEvent) {
@@ -113,7 +70,7 @@ public class Model implements Listener {
         }
     }
 
-    private boolean scoreIsUpdated() {
+    public boolean scoreIsUpdated() {
         if (pipeList.isObjectPassedThrough(bird, Const.forwardSpeed)) {
             score++;
             return true;
@@ -121,8 +78,24 @@ public class Model implements Listener {
         return false;
     }
 
-    private boolean isCrashed() {
+    public boolean isCrashed() {
         return pipeList.isCollided(bird) || ground.isCollided(bird);
+    }
+
+    public Ground getGround() {
+        return ground;
+    }
+
+    public Bird getBird() {
+        return bird;
+    }
+
+    public PipeList getPipeList() {
+        return pipeList;
+    }
+
+    public int getScore() {
+        return score;
     }
 
     private void initialize() {
@@ -141,6 +114,8 @@ public class Model implements Listener {
                 Const.screenX,
                 (int) Math.round(Const.screenY * 0.2)
         );
+        this.pipeList = new PipeList(ground.getY());
+        this.running = true;
         this.score = 0;
     }
 
