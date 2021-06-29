@@ -1,19 +1,6 @@
 package FlappyBird.models;
 
-<<<<<<< HEAD
-import FlappyBird.Const;
-import FlappyBird.events.*;
-import FlappyBird.models.objects.Bird;
-import FlappyBird.models.objects.Ground;
-import FlappyBird.models.objects.PipeList;
-import FlappyBird.states.State;
-import FlappyBird.states.StateMachine;
-
 import java.util.Random;
-=======
-
-import java.util.Random;
-
 import FlappyBird.Const;
 import FlappyBird.events.*;
 import FlappyBird.models.objects.Bird;
@@ -22,7 +9,6 @@ import FlappyBird.models.objects.PipeList;
 import FlappyBird.models.states.MenuState;
 import FlappyBird.models.states.State;
 import FlappyBird.models.states.StateMachine;
->>>>>>> d8f56ff (refactor state)
 
 /**
  * Game engine that tracks the game state
