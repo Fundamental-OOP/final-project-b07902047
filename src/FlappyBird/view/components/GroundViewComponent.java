@@ -2,6 +2,7 @@ package FlappyBird.view.components;
 
 import FlappyBird.events.BaseEvent;
 import FlappyBird.models.objects.Ground;
+import FlappyBird.view.ImageNotFoundException;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -16,7 +17,7 @@ public class GroundViewComponent implements ViewComponent {
     {
         try {
             image = ImageIO.read(new File(imagePath));
-        } catch (IOException ignore) { throw new RuntimeException(); }
+        } catch (IOException ignore) { throw new ImageNotFoundException(); }
     }
 
     public GroundViewComponent() {

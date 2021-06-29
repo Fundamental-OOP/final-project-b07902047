@@ -7,6 +7,7 @@ import FlappyBird.events.Listener;
 import FlappyBird.events.*;
 import FlappyBird.models.Model;
 import FlappyBird.view.components.BackgroundViewComponent;
+import FlappyBird.view.components.BirdViewComponent;
 import FlappyBird.view.components.GroundViewComponent;
 
 import javax.swing.JFrame;
@@ -40,6 +41,7 @@ public class View implements Listener {
         renderer = new Renderer(model);
         renderer.addViewComponent(new BackgroundViewComponent(/* model */));
         renderer.addViewComponent(new GroundViewComponent(/* model */));
+        renderer.addViewComponent(new BirdViewComponent(/* model */));
 
         jFrame.add(renderer);
 

@@ -4,6 +4,7 @@ import FlappyBird.Const;
 import FlappyBird.events.BaseEvent;
 import FlappyBird.events.InitializeEvent;
 import FlappyBird.models.Model;
+import FlappyBird.view.ImageNotFoundException;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -33,7 +34,7 @@ public class BackgroundViewComponent implements ViewComponent {
         try {
             currentImage = ImageIO.read(new File(imageFile));
         } catch (IOException e) {
-            throw new RuntimeException();
+            throw new ImageNotFoundException();
         }
     }
 
