@@ -38,18 +38,17 @@ public class KeyboardEventListener implements KeyListener {
 
     private void setControllerEvent(int keyCode, State state) {
         switch (model.getState()) {
-            case STATE_MENU -> getEventOnMenu(keyCode);
-            case STATE_PLAY -> getEventOnPlay(keyCode);
-            case STATE_STOP -> getEventOnStop(keyCode);
-            case STATE_DEAD -> getEventOnDead(keyCode);
+            case STATE_MENU: getEventOnMenu(keyCode); break;
+            case STATE_PLAY: getEventOnPlay(keyCode); break;
+            case STATE_STOP: getEventOnStop(keyCode); break;
+            case STATE_DEAD: getEventOnDead(keyCode); break;
         }
-        ;
     }
 
     private void getEventOnMenu(int keyCode) {
         switch (keyCode) {
-            case KeyEvent.VK_ESCAPE -> controller.addQueuedEvent(new StateChangeEvent(null));
-            case KeyEvent.VK_SPACE -> controller.addQueuedEvent(new StateChangeEvent(State.STATE_PLAY));
+            case KeyEvent.VK_ESCAPE: controller.addQueuedEvent(new StateChangeEvent(null)); break;
+            case KeyEvent.VK_SPACE: controller.addQueuedEvent(new StateChangeEvent(State.STATE_PLAY)); break;
         };
     }
 
@@ -62,7 +61,8 @@ public class KeyboardEventListener implements KeyListener {
             case KeyEvent.VK_P:
                 controller.addQueuedEvent(new StateChangeEvent(State.STATE_STOP));
                 break;
-            case KeyEvent.VK_SPACE, KeyEvent.VK_UP:
+            case KeyEvent.VK_SPACE:
+            case KeyEvent.VK_UP:
                 controller.addQueuedEvent(new JumpEvent());
                 break;
         };
@@ -71,7 +71,9 @@ public class KeyboardEventListener implements KeyListener {
 
     private void getEventOnStop(int keyCode) {
         switch (keyCode) {
-            case KeyEvent.VK_P -> controller.addQueuedEvent(new StateChangeEvent(null));
+            case KeyEvent.VK_P:
+                controller.addQueuedEvent(new StateChangeEvent(null));
+                break;
         };
     }
 
