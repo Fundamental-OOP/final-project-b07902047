@@ -14,5 +14,5 @@ public abstract class State {
         return name;
     }
 
-    public abstract void action(Model model);
+    public abstract void runTick(Model model);
 }

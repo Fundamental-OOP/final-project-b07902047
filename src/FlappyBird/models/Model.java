@@ -8,7 +8,7 @@ import FlappyBird.events.*;
 import FlappyBird.models.objects.Bird;
 import FlappyBird.models.objects.Ground;
 import FlappyBird.models.objects.PipeList;
-import FlappyBird.models.states.Menu;
+import FlappyBird.models.states.MenuState;
 import FlappyBird.models.states.State;
 import FlappyBird.models.states.StateMachine;
 
@@ -18,15 +18,16 @@ import FlappyBird.models.states.StateMachine;
 public class Model implements Listener {
     private StateMachine stateMachine;
     private boolean running;
-    private Random rnd = new Random();
+    private Random rnd;
     private int score;
 
     private Bird bird;
-    private PipeList pipeList = new PipeList();
     private Ground ground;
+    private PipeList pipeList;
 
     public Model() {
         EventManager.registerListener(this);
+        rnd = new Random();
         this.stateMachine = new StateMachine();
         this.running = false;
     }
@@ -37,7 +38,7 @@ public class Model implements Listener {
     public void run() {
         this.running = true;
         EventManager.post(new InitializeEvent());
-        this.stateMachine.push(new Menu());
+        this.stateMachine.push(new MenuState());
 
         while (this.running) {
             EventManager.post(new TickEvent());
@@ -61,7 +62,7 @@ public class Model implements Listener {
             }
         } else if (event instanceof TickEvent) {
             State curState = this.stateMachine.peek();
-            curState.action(this);
+            curState.runTick(this);
         } else if (event instanceof JumpEvent) {
             bird.setVelocity(Const.birdFlapVelocity);
         } else if (event instanceof InitializeEvent) {
@@ -115,6 +116,8 @@ public class Model implements Listener {
             Const.screenX,
             (int)Math.round(Const.screenY * 0.2)
         );
+        this.pipeList = new PipeList(ground.getY());
+        this.running = true;
         this.score = 0;
     }
 }
