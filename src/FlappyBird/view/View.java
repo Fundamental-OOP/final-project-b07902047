@@ -26,14 +26,14 @@ public class View implements Listener {
         this.controller = controller;
 
         jFrame = new JFrame("Flappy Bird");
-    }
-
-    public View initialize() {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setSize(Const.screenX, Const.screenY);
         jFrame.setResizable(false);
         jFrame.setVisible(true);
         jFrame.addKeyListener(new KeyboardEventListener(controller, model));
+    }
+
+    public View initialize() {
 
         renderer = new Renderer(model);
         renderer.addViewComponent(new BackgroundViewComponent(model.getBackgroundTheme()));
