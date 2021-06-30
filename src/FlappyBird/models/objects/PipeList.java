@@ -1,6 +1,7 @@
 package FlappyBird.models.objects;
 
 import FlappyBird.Const;
+import FlappyBird.models.Model;
 import FlappyBird.models.PipeType;
 
 import java.util.List;
@@ -111,5 +112,11 @@ public class PipeList implements SelfControlled {
             objects.add(pipe.getBottomPipe());
         }
         return objects;
+    }
+
+    @Override
+    public void initialize(Model model) {
+        this.removeAllPipes();
+        this.pipeType = PipeType.randomPipeType(model.getRnd());
     }
 }

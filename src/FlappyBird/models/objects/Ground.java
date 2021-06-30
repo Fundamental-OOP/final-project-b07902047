@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import FlappyBird.Const;
+import FlappyBird.models.Model;
 
 public class Ground extends Object implements SelfControlled {
     public Ground(int x, int y, int width, int height) {
@@ -28,4 +29,8 @@ public class Ground extends Object implements SelfControlled {
         return objects;
     }
 
+    @Override
+    public void initialize(Model model) {
+        this.setX(0);
+    }
 }

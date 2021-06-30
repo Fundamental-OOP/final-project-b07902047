@@ -11,10 +11,8 @@ public enum PipeType
 
     private static final List<PipeType> VALUES =
             Collections.unmodifiableList(Arrays.asList(values()));
-    private static final int SIZE = VALUES.size();
-    private static final Random RANDOM = new Random();
 
-    public static PipeType randomPipeType()  {
-        return VALUES.get(RANDOM.nextInt(SIZE));
+    public static PipeType randomPipeType(Random rnd)  {
+        return VALUES.get(rnd.nextInt(VALUES.size()));
     }
 }

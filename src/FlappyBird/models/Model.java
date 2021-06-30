@@ -45,8 +45,8 @@ public class Model implements Listener {
             Const.screenX,
             (int) Math.round(Const.screenY * 0.2)
         );
-        bird.setMaxPositionY(ground.getY());
-        this.pipeList = new PipeList(ground.getY(), PipeType.randomPipeType());
+        bird.setMaxPositionY(ground.getY() - Const.birdHeight + 1);
+        this.pipeList = new PipeList(ground.getY(), PipeType.randomPipeType(rnd));
         selfControlledEntities.add(ground);
         selfControlledEntities.add(pipeList);
     }
@@ -112,6 +112,10 @@ public class Model implements Listener {
         return bird;
     }
 
+    public Random getRnd() {
+        return rnd;
+    }
+
     public PipeList getPipeList() {
         return pipeList;
     }
@@ -139,8 +143,8 @@ public class Model implements Listener {
 
     private void initialize() {
         this.bird.initialize(rnd.nextInt(this.bird.getTotalState()), rnd.nextInt(this.bird.getTotalState()));
-        this.ground.setX(0);
-        this.pipeList.removeAllPipes();
+        selfControlledEntities.forEach(entities -> entities.initialize(this));
+
         this.running = true;
         this.score = 0;
         // Randomly pick a background theme

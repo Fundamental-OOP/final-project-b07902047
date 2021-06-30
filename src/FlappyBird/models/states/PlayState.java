@@ -17,13 +17,13 @@ public class PlayState extends State {
             EventManager.post(new ScoreEvent());
         }
 
+        Bird bird = model.getBird();
+        bird.actToState(this);
+
         List<SelfControlled> selfControlledEntities = model.getSelfControlledEntities();
         for (SelfControlled selfControlledEntity : selfControlledEntities) {
             selfControlledEntity.updatePosition();
         }
-
-        Bird bird = model.getBird();
-        bird.actToState(this);
 
         if (model.isCrashed()) {
             EventManager.post(new HitEvent());
