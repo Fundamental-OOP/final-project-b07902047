@@ -26,12 +26,14 @@ class Renderer extends JPanel {
         setLayout(new BorderLayout());
     }
 
-    public void addViewComponent(ViewComponent component) {
+    public Renderer addViewComponent(ViewComponent component) {
         components.add(component);
+        return this;
     }
 
-    public void removeViewComponent(ViewComponent component) {
+    public Renderer removeViewComponent(ViewComponent component) {
         components.remove(component);
+        return this;
     }
 
     public void render() {

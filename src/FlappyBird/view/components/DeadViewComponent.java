@@ -27,7 +27,7 @@ public class DeadViewComponent implements ViewComponent {
 
     @Override
     public void paint(Graphics g) {
-        if(model.getState() instanceof DeadState) {
+        if (model.getState() instanceof DeadState) {
             g.drawImage(image, 48, 150, 192 , 42, null);
         }
     }
