@@ -7,7 +7,7 @@ import FlappyBird.models.objects.Object;
 
 public class PlayState extends State {
     public PlayState() {
-        super("Play");
+        super("State Play");
     }
 
     @Override

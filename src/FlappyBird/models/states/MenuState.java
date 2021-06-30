@@ -6,6 +6,6 @@ import FlappyBird.models.objects.Object;
 
 public class MenuState extends State {
     public MenuState() {
-        super("Menu");
+        super("State Menu");
     }
 }

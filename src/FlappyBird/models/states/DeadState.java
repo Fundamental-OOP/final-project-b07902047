@@ -7,6 +7,6 @@ import FlappyBird.models.objects.Object;
 
 public class DeadState extends State {
     public DeadState() {
-        super("Dead");
+        super("State Dead");
     }
 }

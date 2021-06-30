@@ -5,7 +5,7 @@ import FlappyBird.models.objects.Object;
 
 public class StopState extends State {
     public StopState() {
-        super("Stop");
+        super("State Stop");
     }
 
     @Override
