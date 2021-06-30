@@ -1,6 +1,6 @@
 package FlappyBird.view.components;
 
-import FlappyBird.models.objects.Ground;
+import FlappyBird.models.objects.Pipe;
 import FlappyBird.models.objects.PipeList;
 import FlappyBird.view.ImageNotFoundException;
 
@@ -17,13 +17,6 @@ public class PipeViewComponent implements ViewComponent {
     private final String[] pipePositions = {"lower", "upper"};
     private Image[][] images;
 
-    private Random rnd = new Random();
-
-    public PipeViewComponent() {
-        loadImages();
-        // TODO: delete this
-    }
-
     public PipeViewComponent(PipeList pipeList) {
         loadImages();
         this.pipeList = pipeList;
@@ -31,16 +24,15 @@ public class PipeViewComponent implements ViewComponent {
 
     @Override
     public void paint(Graphics g) {
-        int x = rnd.nextInt(200);
-        int upperBottom = rnd.nextInt(200);
-        int lowerTop = upperBottom + 50;
+        for (Pipe pipe : pipeList.getPipes()) {
+            paintPipe(g, pipe);
+        }
+    }
 
-        int color = rnd.nextInt(2);
-
-        int upperTop = upperBottom - images[color][1].getHeight(null);
-
-        g.drawImage(images[color][0], x, lowerTop, 52, 320, null);
-        g.drawImage(images[color][1], x, upperTop, 52, 320, null);
+    private void paintPipe(Graphics g, Pipe pipe) {
+        int color = pipe.getType().ordinal();
+        g.drawImage(images[color][0], pipe.getX(), pipe.getBottomPipe().getY(), pipe.getWidth(), pipe.getBottomPipe().getHeight(), null);
+        g.drawImage(images[color][1], pipe.getX(), pipe.getUpperPipe().getY(), pipe.getWidth(), pipe.getUpperPipe().getHeight(), null);
     }
 
     private void loadImages() {
@@ -52,6 +44,8 @@ public class PipeViewComponent implements ViewComponent {
                     images[i][j] = ImageIO.read(new File(filepath));
                 }
             }
-        } catch (IOException ignore) { throw new ImageNotFoundException(); }
+        } catch (IOException ignore) {
+            throw new ImageNotFoundException();
+        }
     }
 }

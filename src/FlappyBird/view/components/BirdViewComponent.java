@@ -17,22 +17,15 @@ public class BirdViewComponent implements ViewComponent {
     private Image[][] images;
     private Bird bird;
 
-    private Random rnd = new Random(); // TODO: remove
-
-    public BirdViewComponent() {
-        loadImages();
-        // TODO: delete this
-    }
-
-    public BirdViewComponent(Model model) {
-        // this.bird = model.getBird();
+    public BirdViewComponent(Bird bird) {
+        this.bird = bird;
         loadImages();
     }
 
     @Override
     public void paint(Graphics g) {
-        Image image = images[rnd.nextInt(3)][rnd.nextInt(3)];
-        g.drawImage(image, 50, 50, 34, 24, null);
+        Image image = images[bird.getType()][bird.getState()];
+        g.drawImage(image, bird.getX(), bird.getY(), 34, 24, null);
     }
 
     private void loadImages() {

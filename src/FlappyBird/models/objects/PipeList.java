@@ -39,10 +39,8 @@ public class PipeList {
     }
 
     private void removeOutOfBoundPipes() {
-        while (pipes.size() != 0) {
-            if (pipes.get(0).getX() + pipes.get(0).getWidth() < 0) {
-                pipes.remove(0);
-            }
+        while (pipes.size() != 0 && pipes.get(0).getX() + pipes.get(0).getWidth() < 0) {
+            pipes.remove(0);
         }
     }
 
@@ -94,5 +92,7 @@ public class PipeList {
         return false;
     }
 
-
+    public List<Pipe> getPipes(){
+        return pipes;
+    }
 }

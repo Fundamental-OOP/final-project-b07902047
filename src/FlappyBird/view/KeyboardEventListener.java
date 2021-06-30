@@ -85,11 +85,11 @@ public class KeyboardEventListener implements KeyListener {
             case KeyEvent.VK_ESCAPE:
                 controller.addQueuedEvent(new StateChangeEvent(null));
                 controller.addQueuedEvent(new StateChangeEvent(null));
+                break;
             case KeyEvent.VK_SPACE:
-                // TODO:
-                // controller.addQueuedEvent(new StateChangeEvent(null));
-                // controller.addQueuedEvent(new InitializeEvent());
-
+                controller.addQueuedEvent(new StateChangeEvent(null));
+                controller.addQueuedEvent(new InitializeEvent());
+                break;
         }
     }
 

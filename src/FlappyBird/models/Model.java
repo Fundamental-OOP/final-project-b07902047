@@ -122,9 +122,9 @@ public class Model implements Listener {
                 Const.birdInitY,
                 Const.birdWidth,
                 Const.birdHeight,
-                0,
-                rnd.nextInt(2),
-                4
+                rnd.nextInt(3),
+                rnd.nextInt(3),
+                3
         );
         objects.add(this.bird);
         this.ground = new Ground(

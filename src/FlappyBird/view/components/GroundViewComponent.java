@@ -20,10 +20,6 @@ public class GroundViewComponent implements ViewComponent {
         } catch (IOException ignore) { throw new ImageNotFoundException(); }
     }
 
-    public GroundViewComponent() {
-        // TODO: delete this
-    }
-
     public GroundViewComponent(Ground ground) {
         this.ground = ground;
     }
