@@ -1,5 +1,7 @@
 package FlappyBird.models.states;
 
+import java.util.List;
+
 import FlappyBird.events.*;
 import FlappyBird.models.Model;
 import FlappyBird.models.objects.*;
@@ -13,6 +15,11 @@ public class PlayState extends State {
     public void runTick(Model model) {
         if (model.scoreIsUpdated()) {
             EventManager.post(new ScoreEvent());
+        }
+
+        List<SelfControlled> selfControlledEntities = model.getSelfControlledEntities();
+        for (SelfControlled selfControlledEntity : selfControlledEntities) {
+            selfControlledEntity.updatePosition();
         }
 
         Bird bird = model.getBird();
