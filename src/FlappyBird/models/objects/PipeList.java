@@ -11,9 +11,11 @@ public class PipeList implements SelfControlled {
     private List<Pipe> pipes;
     private int nextPipeGapX;
     private int groundY;
+    private PipeType pipeType;
     private Random rnd;
 
-    public PipeList(int groundY) {
+    public PipeList(int groundY, PipeType pipeType) {
+        this.pipeType = pipeType;
         pipes = new ArrayList<Pipe>();
         nextPipeGapX = 100; // The first pipe will be 100 distance away
         this.groundY = groundY; // The y coordinate of the ground. Pipes should be above it.
@@ -50,7 +52,7 @@ public class PipeList implements SelfControlled {
             int upperY = rnd.nextInt(groundY - gapY); // heigher than ground and leave enough space for gap
             pipes.add(
                 new Pipe(
-                    PipeType.GREEN,
+                    this.pipeType,
                     Const.screenX,
                     Const.pipeWidth,
                     upperY,

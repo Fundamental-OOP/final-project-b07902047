@@ -1,5 +1,6 @@
 package FlappyBird.view.components;
 
+import FlappyBird.Const;
 import FlappyBird.events.BaseEvent;
 import FlappyBird.models.objects.Ground;
 import FlappyBird.view.ImageNotFoundException;
@@ -26,6 +27,7 @@ public class GroundViewComponent implements ViewComponent {
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(image, 0, 400, 336, 112, null);
+        g.drawImage(image, this.ground.getX(), this.ground.getY(), this.ground.getWidth(), this.ground.getHeight(), null);
+        g.drawImage(image, this.ground.getX() - Const.screenX, this.ground.getY(), this.ground.getWidth(), this.ground.getHeight(), null);
     }
 }

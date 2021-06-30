@@ -9,6 +9,8 @@ import FlappyBird.models.statesHandler.StateHandler;
 public class Bird extends Object {
     // bird flap state (image 0/1/2/3)
     private int state, totalState;
+    // bird clock
+    private int time;
     // bird type (red/green)
     private int type;
     // bird position and speed
@@ -42,10 +44,13 @@ public class Bird extends Object {
         this.type = type;
         this.state = initState;
         this.velocity = 0;
+        this.time = 0;
     }
 
     public int nextState() {
-        state = (state + 1) % totalState;
+        if (time++ % 3 == 0) {
+            state = (state + 1) % totalState;
+        }
         return state;
     }
 

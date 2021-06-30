@@ -1,6 +1,7 @@
 package FlappyBird.view.components;
 
 import FlappyBird.models.Model;
+import FlappyBird.models.states.MenuState;
 import FlappyBird.view.ImageNotFoundException;
 
 import javax.imageio.ImageIO;
@@ -8,6 +9,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -24,8 +26,12 @@ public class ScoreViewComponent implements ViewComponent {
 
     @Override
     public void paint(Graphics g) {
+        if (model.getState() instanceof MenuState) {
+            return;
+        }
         int currentScore = model.getScore();
         List<Integer> scoreDigits = seperateScoreToDigit(currentScore);
+        Collections.reverse(scoreDigits);
         int scoreWidth = getScoreWidth(scoreDigits);
         int startX = 144 - scoreWidth / 2;
         for (Integer i : scoreDigits) {

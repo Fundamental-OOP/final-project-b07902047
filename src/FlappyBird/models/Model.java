@@ -46,7 +46,7 @@ public class Model implements Listener {
             (int) Math.round(Const.screenY * 0.2)
         );
         bird.setMaxPositionY(ground.getY());
-        this.pipeList = new PipeList(ground.getY());
+        this.pipeList = new PipeList(ground.getY(), PipeType.randomPipeType());
         selfControlledEntities.add(ground);
         selfControlledEntities.add(pipeList);
     }
@@ -63,7 +63,7 @@ public class Model implements Listener {
             EventManager.post(new TickEvent());
 
             try {
-                Thread.sleep(50);
+                Thread.sleep(30);
             } catch (InterruptedException ignored) {
             }
         }

@@ -6,7 +6,7 @@ public class StateChangeEvent extends ControllerEvent {
     State state;
 
     public StateChangeEvent(State state) {
-        this.name = "Quit event";
+        this.name = "State change event";
         this.state = state;
     }
 

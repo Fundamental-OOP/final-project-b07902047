@@ -3,12 +3,13 @@ package FlappyBird.controller;
 import FlappyBird.events.*;
 import FlappyBird.models.Model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Controller implements Listener {
     Model model;
-    private final Set<ControllerEvent> queuedEventSet = new HashSet<>();
+    private final ArrayList<ControllerEvent> queuedEventSet = new ArrayList<>();
 
     public Controller(Model model) {
         EventManager.registerListener(this);
