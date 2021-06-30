@@ -13,5 +13,6 @@ public class MenuStateHandler extends StateHandler {
     @Override
     public void handleState(Bird bird) {
         bird.oscillate();
+        bird.nextState();
     }
 }

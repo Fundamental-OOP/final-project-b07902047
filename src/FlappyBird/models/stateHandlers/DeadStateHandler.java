@@ -15,6 +15,5 @@ public class DeadStateHandler extends StateHandler {
     public void handleState(Bird bird) {
         bird.setVelocity(Const.birdMaxVelocity);
         bird.updatePosition();
-        bird.nextState();
     }
 }

@@ -19,8 +19,8 @@ public class Bird extends Object {
     // The bird will only move between [initY - boundary, initY + boundary]
     private int boundary;
     // The direction the bird is flying towards. Positive for downward and negative for upward.
-    // Using only 0.5 of its normal velocity to fly a little slower.
-    private double directionAndScale;
+    // Swing speed
+    private int swingVelocity;
     // The distance of movement.
     private int deltaY;
     // Impose a limit on the bird's maximum y position
@@ -33,7 +33,6 @@ public class Bird extends Object {
         this.totalState = totalState;
         // variables for actToState
         this.boundary = 16;
-        this.directionAndScale = 0.5;
         this.deltaY = 0;
         this.stateHandlers = stateHandlers;
     }
@@ -44,6 +43,7 @@ public class Bird extends Object {
         this.type = type;
         this.state = initState;
         this.velocity = 0;
+        this.swingVelocity = 1;
         this.time = 0;
     }
 
@@ -97,12 +97,10 @@ public class Bird extends Object {
 
     // Move up and down a little
     public void oscillate() {
-        deltaY += (int)(directionAndScale * this.getVelocity());
-        this.setY(this.getY() + deltaY);
-
+        y += swingVelocity;
+        deltaY += swingVelocity;
         if (Math.abs(deltaY) >= boundary) {
-            // If the bird has moved out of the boundary, change the direction.
-            directionAndScale *= -1.0;
+            swingVelocity *= -1;
         }
     }
 
