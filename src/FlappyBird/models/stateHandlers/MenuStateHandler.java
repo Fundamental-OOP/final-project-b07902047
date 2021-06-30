@@ -1,4 +1,4 @@
-package FlappyBird.models.statesHandler;
+package FlappyBird.models.stateHandlers;
 
 import FlappyBird.models.objects.Bird;
 import FlappyBird.models.states.MenuState;
