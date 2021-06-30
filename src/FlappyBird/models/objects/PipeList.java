@@ -1,6 +1,8 @@
 package FlappyBird.models.objects;
 
 import FlappyBird.Const;
+import FlappyBird.models.PipeType;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
@@ -50,7 +52,7 @@ public class PipeList {
             int upperY = rnd.nextInt(groundY - gapY); // heigher than ground and leave enough space for gap
             pipes.add(
                 new Pipe(
-                    0,
+                    PipeType.GREEN,
                     Const.screenX,
                     Const.pipeWidth,
                     upperY,

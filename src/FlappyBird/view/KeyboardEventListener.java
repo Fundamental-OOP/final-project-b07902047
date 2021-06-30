@@ -5,7 +5,7 @@ import FlappyBird.events.InitializeEvent;
 import FlappyBird.events.JumpEvent;
 import FlappyBird.events.StateChangeEvent;
 import FlappyBird.models.Model;
-import FlappyBird.states.State;
+import FlappyBird.models.states.*;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -31,19 +31,17 @@ public class KeyboardEventListener implements KeyListener {
     }
 
     private void setControllerEvent(int keyCode, State state) {
-        switch (state) {
-            case STATE_MENU:
-                getEventOnMenu(keyCode);
-                break;
-            case STATE_PLAY:
-                getEventOnPlay(keyCode);
-                break;
-            case STATE_STOP:
-                getEventOnStop(keyCode);
-                break;
-            case STATE_DEAD:
-                getEventOnDead(keyCode);
-                break;
+        if(state instanceof MenuState){
+            getEventOnMenu(keyCode);
+        }
+        else if(state instanceof PlayState){
+            getEventOnPlay(keyCode);
+        }
+        else if(state instanceof StopState){
+            getEventOnStop(keyCode);
+        }
+        else if(state instanceof DeadState){
+            getEventOnDead(keyCode);
         }
     }
 
@@ -53,7 +51,7 @@ public class KeyboardEventListener implements KeyListener {
                 controller.addQueuedEvent(new StateChangeEvent(null));
                 break;
             case KeyEvent.VK_SPACE:
-                controller.addQueuedEvent(new StateChangeEvent(State.STATE_PLAY));
+                controller.addQueuedEvent(new StateChangeEvent(new PlayState()));
                 break;
         }
     }
@@ -65,7 +63,7 @@ public class KeyboardEventListener implements KeyListener {
                 controller.addQueuedEvent(new InitializeEvent());
                 break;
             case KeyEvent.VK_P:
-                controller.addQueuedEvent(new StateChangeEvent(State.STATE_STOP));
+                controller.addQueuedEvent(new StateChangeEvent(new StopState()));
                 break;
             case KeyEvent.VK_SPACE:
             case KeyEvent.VK_UP:
