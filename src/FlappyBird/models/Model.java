@@ -36,7 +36,6 @@ public class Model implements Listener {
         rnd = new Random();
         this.stateMachine = new StateMachine();
         this.running = false;
-        this.objects = new ArrayList<>();
     }
 
     /**
@@ -120,6 +119,7 @@ public class Model implements Listener {
     }
 
     private void initialize() {
+        this.objects = new ArrayList<>();
         this.bird = new Bird(
                 Const.birdInitX,
                 Const.birdInitY,
