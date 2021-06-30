@@ -51,7 +51,4 @@ public class Object {
         Rectangle otherRectangle = other.getRectangle();
         return selfRectangle.intersects(otherRectangle);
     }
-
-    // Change self's position in different state.
-    public void actToState(Model model, State state) {};
 }

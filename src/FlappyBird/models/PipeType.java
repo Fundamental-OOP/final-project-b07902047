@@ -1,6 +1,3 @@
 package FlappyBird.models;
 
-public enum PipeType
-{
-    RED, GREEN;
-}
+public enum PipeType { RED, GREEN; }

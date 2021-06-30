@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class PipeList {
+public class PipeList implements SelfControlled {
     private List<Pipe> pipes;
     private int nextPipeGapX;
     private int groundY;
@@ -62,7 +62,8 @@ public class PipeList {
         }
     }
 
-    public void updatePipes() {
+    @Override
+    public void updatePosition() {
         updatePipePosition(Const.forwardSpeed);
         removeOutOfBoundPipes();
         getNewPipe();
@@ -94,5 +95,19 @@ public class PipeList {
 
     public List<Pipe> getPipes(){
         return pipes;
+    }
+
+    public void removeAllPipes() {
+        pipes.clear();
+    }
+
+    @Override
+    public List<Object> getObjects() {
+        List<Object> objects = new ArrayList<Object>();
+        for (Pipe pipe : pipes) {
+            objects.add(pipe.getUpperPipe());
+            objects.add(pipe.getBottomPipe());
+        }
+        return objects;
     }
 }

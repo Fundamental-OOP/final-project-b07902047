@@ -3,7 +3,6 @@ package FlappyBird.models.states;
 import FlappyBird.events.*;
 import FlappyBird.models.Model;
 import FlappyBird.models.objects.*;
-import FlappyBird.models.objects.Object;
 
 public class PlayState extends State {
     public PlayState() {
@@ -16,12 +15,8 @@ public class PlayState extends State {
             EventManager.post(new ScoreEvent());
         }
 
-        PipeList pipeList = model.getPipeList();
-        pipeList.updatePipes();
-
-        for (Object object : model.getObjects()) {
-            object.actToState(model, this);
-        }
+        Bird bird = model.getBird();
+        bird.actToState(this);
 
         if (model.isCrashed()) {
             EventManager.post(new HitEvent());
