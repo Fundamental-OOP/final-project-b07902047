@@ -8,6 +8,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -26,6 +27,7 @@ public class ScoreViewComponent implements ViewComponent {
     public void paint(Graphics g) {
         int currentScore = model.getScore();
         List<Integer> scoreDigits = seperateScoreToDigit(currentScore);
+        Collections.reverse(scoreDigits);
         int scoreWidth = getScoreWidth(scoreDigits);
         int startX = 144 - scoreWidth / 2;
         for (Integer i : scoreDigits) {
