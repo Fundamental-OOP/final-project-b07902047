@@ -6,16 +6,16 @@ import FlappyBird.view.ImageNotFoundException;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 public class PipeViewComponent implements ViewComponent {
-    private PipeList pipeList;
+    private final PipeList pipeList;
     private final String imagePath = "./src/FlappyBird/view/images/pipes/";
     private final String[] pipeColors = {"green", "red"};
     private final String[] pipePositions = {"lower", "upper"};
-    private Image[][] images;
+    private BufferedImage[][] images;
 
     public PipeViewComponent(PipeList pipeList) {
         loadImages();
@@ -31,12 +31,16 @@ public class PipeViewComponent implements ViewComponent {
 
     private void paintPipe(Graphics g, Pipe pipe) {
         int color = pipe.getType().ordinal();
-        g.drawImage(images[color][0], pipe.getX(), pipe.getBottomPipe().getY(), pipe.getWidth(), pipe.getBottomPipe().getHeight(), null);
-        g.drawImage(images[color][1], pipe.getX(), pipe.getUpperPipe().getY(), pipe.getWidth(), pipe.getUpperPipe().getHeight(), null);
+        BufferedImage bottomPipeImage = images[color][0];
+        BufferedImage upperPipeImage = images[color][1];
+        BufferedImage bottomPipe = bottomPipeImage.getSubimage(0, 0, bottomPipeImage.getWidth(), pipe.getBottomPipe().getHeight());
+        BufferedImage upperPipe = upperPipeImage.getSubimage(0, upperPipeImage.getHeight() - pipe.getUpperPipe().getHeight(), bottomPipeImage.getWidth(), pipe.getUpperPipe().getHeight());
+        g.drawImage(bottomPipe, pipe.getX(), pipe.getBottomPipe().getY(), pipe.getWidth(), pipe.getBottomPipe().getHeight(), null);
+        g.drawImage(upperPipe, pipe.getX(), pipe.getUpperPipe().getY(), pipe.getWidth(), pipe.getUpperPipe().getHeight(), null);
     }
 
     private void loadImages() {
-        images = new Image[pipeColors.length][pipePositions.length];
+        images = new BufferedImage[pipeColors.length][pipePositions.length];
         try {
             for (int i = 0; i < pipeColors.length; ++i) {
                 for (int j = 0; j < pipePositions.length; ++j) {
