@@ -24,14 +24,11 @@ public class View implements Listener {
         EventManager.registerListener(this);
         this.model = model;
         this.controller = controller;
+
+        jFrame = new JFrame("Flappy Bird");
     }
 
     public View initialize() {
-        if (isInitialized) {
-            jFrame.setVisible(false);
-            jFrame.dispose();
-        }
-        jFrame = new JFrame("Flappy Bird");
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setSize(Const.screenX, Const.screenY);
         jFrame.setResizable(false);
