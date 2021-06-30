@@ -13,10 +13,10 @@ public final class Const {
     public static final int birdFlapVelocity = -10;
 
     public static final int pipeWidth = 52;
-    public static final int minPipeGapY = 50;
-    public static final int maxPipeGapY = 150;
-    public static final int minPipeGapX = 50;
-    public static final int maxPipeGapX = 150;
+    public static final int minPipeGapY = 90;
+    public static final int maxPipeGapY = 120;
+    public static final int minPipeGapX = 190;
+    public static final int maxPipeGapX = 220;
     
     public static final int forwardSpeed = 4;
 }

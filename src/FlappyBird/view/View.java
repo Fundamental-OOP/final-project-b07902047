@@ -28,6 +28,9 @@ public class View implements Listener {
     }
 
     public View initialize() {
+        if(isInitialized){
+            jFrame.setVisible(false);
+        }
         jFrame = new JFrame("Flappy Bird");
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setSize(Const.screenX, Const.screenY);
@@ -62,6 +65,7 @@ public class View implements Listener {
             // play sound
         } else if (event instanceof QuitEvent) {
             this.isInitialized = false;
+            jFrame.setVisible(false);
         }
     }
 }

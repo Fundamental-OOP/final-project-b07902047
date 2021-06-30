@@ -97,7 +97,6 @@ public class Bird extends Object{
                 directionAndScale *= -1.0;
             }
 
-            ground.updatePosition();
             this.nextState();
         } else if (state instanceof PlayState) {
             Ground ground = model.getGround();

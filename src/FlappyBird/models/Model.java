@@ -51,7 +51,7 @@ public class Model implements Listener {
             EventManager.post(new TickEvent());
 
             try {
-                Thread.sleep(50);
+                Thread.sleep(30);
             } catch (InterruptedException ignored) {
             }
         }
@@ -77,6 +77,7 @@ public class Model implements Listener {
             initialize();
         } else if (event instanceof QuitEvent) {
             this.running = false;
+            System.exit(0);
         }
     }
 
