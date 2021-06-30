@@ -29,8 +29,10 @@ public class Bird extends Object{
         this.deltaY = 0;
     }
 
-    public int nextState() {
-        state = (state + 1) % totalState;
+    public int nextState(int time) {
+        if (time % 3 == 0) {
+            state = (state + 1) % totalState;
+        }
         return state;
     }
 
@@ -83,7 +85,7 @@ public class Bird extends Object{
             if (!ground.isCollided(this)) {
                 this.setVelocity(Const.birdMaxVelocity);
                 this.updatePosition(ground.getY());
-                this.nextState();
+                //this.nextState();
             }
         } else if (state instanceof MenuState) {
             Ground ground = model.getGround();
@@ -97,12 +99,12 @@ public class Bird extends Object{
                 directionAndScale *= -1.0;
             }
 
-            this.nextState();
+            this.nextState(model.getTime());
         } else if (state instanceof PlayState) {
             Ground ground = model.getGround();
-            this.updatePosition(ground.getY());;
+            this.updatePosition(ground.getY());
             this.speedUp();
-            this.nextState();
+            this.nextState(model.getTime());
 
         }
     }

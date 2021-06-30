@@ -22,7 +22,7 @@ public class Model implements Listener {
     private StateMachine stateMachine;
     private boolean running;
     private Random rnd;
-    private int score;
+    private int score, time;
 
     private Bird bird;
     private Ground ground;
@@ -71,6 +71,7 @@ public class Model implements Listener {
         } else if (event instanceof TickEvent) {
             State curState = this.stateMachine.peek();
             curState.runTick(this);
+            this.time += 1;
         } else if (event instanceof JumpEvent) {
             bird.setVelocity(Const.birdFlapVelocity);
         } else if (event instanceof InitializeEvent) {
@@ -112,6 +113,8 @@ public class Model implements Listener {
         return score;
     }
 
+    public int getTime() { return time; }
+
     public BackgroundTheme getBackgroundTheme() {
         return backgroundTheme;
     }
@@ -138,6 +141,7 @@ public class Model implements Listener {
         this.pipeList = new PipeList(ground.getY());
         this.running = true;
         this.score = 0;
+        this.time = 0;
         // Randomly pick a background theme
         this.backgroundTheme = BackgroundTheme.values()[rnd.nextInt(BackgroundTheme.values().length)];
     }
