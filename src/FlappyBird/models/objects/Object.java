@@ -1,5 +1,6 @@
 package FlappyBird.models.objects;
 
+import FlappyBird.models.Model;
 import FlappyBird.models.states.State;
 
 import java.awt.Rectangle;
@@ -51,7 +52,6 @@ public class Object {
         return selfRectangle.intersects(otherRectangle);
     }
 
-    public void actToState(State state) {
-        // Change self's position in different state.
-    }
+    // Change self's position in different state.
+    public void actToState(Model model, State state) {};
 }

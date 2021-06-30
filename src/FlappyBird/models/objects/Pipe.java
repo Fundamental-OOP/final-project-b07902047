@@ -1,7 +1,9 @@
 package FlappyBird.models.objects;
 
+import FlappyBird.models.PipeType;
+
 public class Pipe {
-    private int type;
+    private PipeType type;
     private int x;
     private int width;
     Object upperPipe, bottomPipe;
@@ -17,7 +19,7 @@ public class Pipe {
     |  |
      */
 
-    public Pipe(int type, int x, int width, int upperPipeHeight, int gap, int bottomPipeHeight) {
+    public Pipe(PipeType type, int x, int width, int upperPipeHeight, int gap, int bottomPipeHeight) {
         this.type = type;
         this.x = x;
         this.width = width;
@@ -35,7 +37,7 @@ public class Pipe {
         return x;
     }
 
-    public int getType() {
+    public PipeType getType() {
         return type;
     }
 

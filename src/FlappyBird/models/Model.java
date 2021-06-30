@@ -1,14 +1,18 @@
 package FlappyBird.models;
 
-import java.util.Random;
 import FlappyBird.Const;
 import FlappyBird.events.*;
 import FlappyBird.models.objects.Bird;
 import FlappyBird.models.objects.Ground;
+import FlappyBird.models.objects.Object;
 import FlappyBird.models.objects.PipeList;
 import FlappyBird.models.states.MenuState;
 import FlappyBird.models.states.State;
 import FlappyBird.models.states.StateMachine;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Game engine that tracks the game state
@@ -22,6 +26,8 @@ public class Model implements Listener {
 
     private Bird bird;
     private Ground ground;
+    private List<Object> objects;
+
     private PipeList pipeList;
     private BackgroundTheme backgroundTheme;
 
@@ -30,6 +36,7 @@ public class Model implements Listener {
         rnd = new Random();
         this.stateMachine = new StateMachine();
         this.running = false;
+        this.objects = new ArrayList<>();
     }
 
     /**
@@ -45,7 +52,8 @@ public class Model implements Listener {
 
             try {
                 Thread.sleep(50);
-            } catch (InterruptedException ignored) { }
+            } catch (InterruptedException ignored) {
+            }
         }
     }
 
@@ -96,6 +104,10 @@ public class Model implements Listener {
         return pipeList;
     }
 
+    public List<Object> getObjects() {
+        return objects;
+    }
+
     public int getScore() {
         return score;
     }
@@ -114,12 +126,15 @@ public class Model implements Listener {
                 rnd.nextInt(2),
                 4
         );
+        objects.add(this.bird);
         this.ground = new Ground(
                 0,
                 (int) Math.round(Const.screenY * 0.8),
                 Const.screenX,
                 (int) Math.round(Const.screenY * 0.2)
         );
+        objects.add(this.ground);
+
         this.pipeList = new PipeList(ground.getY());
         this.running = true;
         this.score = 0;
