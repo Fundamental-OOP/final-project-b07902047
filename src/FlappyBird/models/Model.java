@@ -138,7 +138,7 @@ public class Model implements Listener {
         );
         objects.add(this.ground);
 
-        this.pipeList = new PipeList(ground.getY());
+        this.pipeList = new PipeList(ground.getY(), PipeType.randomPipeType());
         this.running = true;
         this.score = 0;
         this.time = 0;
