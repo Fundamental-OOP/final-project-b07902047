@@ -4,7 +4,6 @@ import FlappyBird.Const;
 import FlappyBird.controller.Controller;
 import FlappyBird.events.*;
 import FlappyBird.models.Model;
-import FlappyBird.models.states.PlayState;
 import FlappyBird.view.components.*;
 
 import javax.swing.*;
@@ -28,7 +27,7 @@ public class View implements Listener {
     }
 
     public View initialize() {
-        if(isInitialized){
+        if (isInitialized) {
             jFrame.setVisible(false);
         }
         jFrame = new JFrame("Flappy Bird");
@@ -43,6 +42,8 @@ public class View implements Listener {
         renderer.addViewComponent(new PipeViewComponent(model.getPipeList()));
         renderer.addViewComponent(new GroundViewComponent(model.getGround()));
         renderer.addViewComponent(new ScoreViewComponent(model));
+        renderer.addViewComponent(new MenuViewComponent(model));
+        renderer.addViewComponent(new DeadViewComponent(model));
         renderer.addViewComponent(new BirdViewComponent(model.getBird()));
 
         jFrame.add(renderer);
@@ -66,6 +67,7 @@ public class View implements Listener {
         } else if (event instanceof QuitEvent) {
             this.isInitialized = false;
             jFrame.setVisible(false);
+            jFrame.dispose();
         }
     }
 }

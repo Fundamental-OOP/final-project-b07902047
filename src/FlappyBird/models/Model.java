@@ -77,7 +77,6 @@ public class Model implements Listener {
             initialize();
         } else if (event instanceof QuitEvent) {
             this.running = false;
-            System.exit(0);
         }
     }
 
