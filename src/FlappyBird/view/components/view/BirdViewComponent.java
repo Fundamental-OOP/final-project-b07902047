@@ -1,5 +1,6 @@
 package FlappyBird.view.components.view;
 
+import FlappyBird.models.BirdType;
 import FlappyBird.models.objects.Bird;
 import FlappyBird.view.ImageNotFoundException;
 
@@ -10,7 +11,7 @@ import java.io.IOException;
 
 public class BirdViewComponent implements ViewComponent {
     private final String imageDirectoryPath = "./src/FlappyBird/view/images/birds/";
-    private final String[] birdColors = {"blue", "yellow", "red"};
+    private final String[] birdColors = BirdType.getNames();
     private final String[] birdActions = {"down", "mid", "up"};
     private Image[][] images;
     private Bird bird;
@@ -22,7 +23,7 @@ public class BirdViewComponent implements ViewComponent {
 
     @Override
     public void paint(Graphics g) {
-        Image image = images[bird.getType()][bird.getState()];
+        Image image = images[bird.getType().ordinal()][bird.getState()];
         g.drawImage(image, bird.getX(), bird.getY(), 34, 24, null);
     }
 

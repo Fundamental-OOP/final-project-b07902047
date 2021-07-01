@@ -3,6 +3,7 @@ package FlappyBird.models.objects;
 import java.util.List;
 
 import FlappyBird.Const;
+import FlappyBird.models.BirdType;
 import FlappyBird.models.stateHandlers.StateHandler;
 import FlappyBird.models.states.State;
 
@@ -12,7 +13,7 @@ public class Bird extends Object {
     // bird clock
     private int time;
     // bird type (red/green)
-    private int type;
+    private BirdType birdType;
     // bird position and speed
     private int velocity;
     // When displaying the menu, make the bird move around a little
@@ -37,10 +38,10 @@ public class Bird extends Object {
         this.stateHandlers = stateHandlers;
     }
 
-    public void initialize(int type, int initState) {
+    public void initialize(BirdType birdType, int initState) {
         this.x = Const.birdInitX;
         this.y = Const.birdInitY;
-        this.type = type;
+        this.birdType = birdType;
         this.state = initState;
         this.velocity = 0;
         this.swingVelocity = 1;
@@ -67,8 +68,8 @@ public class Bird extends Object {
         return state;
     }
 
-    public int getType() {
-        return type;
+    public BirdType getType() {
+        return birdType;
     }
 
     public int getVelocity() {

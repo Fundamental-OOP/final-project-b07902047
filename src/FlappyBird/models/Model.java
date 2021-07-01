@@ -142,7 +142,7 @@ public class Model implements Listener {
     }
 
     private void initialize() {
-        this.bird.initialize(rnd.nextInt(this.bird.getTotalState()), rnd.nextInt(this.bird.getTotalState()));
+        this.bird.initialize(BirdType.randomBirdType(rnd), rnd.nextInt(this.bird.getTotalState()));
         selfControlledEntities.forEach(entities -> entities.initialize(this));
 
         this.running = true;

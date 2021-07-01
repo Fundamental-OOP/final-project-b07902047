@@ -8,6 +8,10 @@ import java.util.Random;
 public enum BirdType {
     BLUE, RED, YELLOW;
 
+    public static String[] getNames() {
+        return new String[]{"blue", "red", "yellow"};
+    }
+
     private static final List<BirdType> VALUES =
             Collections.unmodifiableList(Arrays.asList(values()));
 

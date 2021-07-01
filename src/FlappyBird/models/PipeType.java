@@ -9,6 +9,10 @@ public enum PipeType
 {
     GREEN, RED;
 
+    public static String[] getNames() {
+        return new String[]{"green", "red"};
+    }
+
     private static final List<PipeType> VALUES =
             Collections.unmodifiableList(Arrays.asList(values()));
 

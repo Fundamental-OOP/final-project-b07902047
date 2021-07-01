@@ -1,5 +1,6 @@
 package FlappyBird.view.components.view;
 
+import FlappyBird.models.PipeType;
 import FlappyBird.models.objects.Object;
 import FlappyBird.models.objects.Pipe;
 import FlappyBird.models.objects.PipeList;
@@ -14,7 +15,7 @@ import java.io.IOException;
 public class PipeViewComponent implements ViewComponent {
     private final PipeList pipeList;
     private final String imagePath = "./src/FlappyBird/view/images/pipes/";
-    private final String[] pipeColors = {"green", "red"};
+    private final String[] pipeColors = PipeType.getNames();
     private BufferedImage[] upperPipeImages, lowerPipeImages;
 
     public PipeViewComponent(PipeList pipeList) {
