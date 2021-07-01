@@ -1,4 +1,4 @@
-package FlappyBird.view;
+package FlappyBird.controller;
 
 import FlappyBird.controller.Controller;
 import FlappyBird.events.InitializeEvent;
