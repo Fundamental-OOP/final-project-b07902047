@@ -33,10 +33,14 @@ public class PipeViewComponent implements ViewComponent {
         int color = pipe.getType().ordinal();
         BufferedImage bottomPipeImage = images[color][0];
         BufferedImage upperPipeImage = images[color][1];
-        BufferedImage bottomPipe = bottomPipeImage.getSubimage(0, 0, bottomPipeImage.getWidth(), Math.min(pipe.getBottomPipe().getHeight(), bottomPipeImage.getHeight()));
-        BufferedImage upperPipe = upperPipeImage.getSubimage(0, Math.max(upperPipeImage.getHeight() - pipe.getUpperPipe().getHeight(), 0), bottomPipeImage.getWidth(), Math.min(pipe.getUpperPipe().getHeight(), bottomPipeImage.getHeight()));
-        g.drawImage(bottomPipe, pipe.getX(), pipe.getBottomPipe().getY(), pipe.getWidth(), pipe.getBottomPipe().getHeight(), null);
-        g.drawImage(upperPipe, pipe.getX(), pipe.getUpperPipe().getY(), pipe.getWidth(), pipe.getUpperPipe().getHeight(), null);
+        if(pipe.getBottomPipe().getHeight()>0) {
+            BufferedImage bottomPipe = bottomPipeImage.getSubimage(0, 0, bottomPipeImage.getWidth(), Math.min(pipe.getBottomPipe().getHeight(), bottomPipeImage.getHeight()));
+            g.drawImage(bottomPipe, pipe.getX(), pipe.getBottomPipe().getY(), pipe.getWidth(), pipe.getBottomPipe().getHeight(), null);
+        }
+        if(pipe.getUpperPipe().getHeight()>0) {
+            BufferedImage upperPipe = upperPipeImage.getSubimage(0, Math.max(upperPipeImage.getHeight() - pipe.getUpperPipe().getHeight(), 0), upperPipeImage.getWidth(), Math.min(pipe.getUpperPipe().getHeight(), upperPipeImage.getHeight()));
+            g.drawImage(upperPipe, pipe.getX(), pipe.getUpperPipe().getY(), pipe.getWidth(), pipe.getUpperPipe().getHeight(), null);
+        }
     }
 
     private void loadImages() {
