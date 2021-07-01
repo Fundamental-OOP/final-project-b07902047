@@ -21,4 +21,6 @@ public final class Const {
     public static final int maxPipeGapX = 220;
 
     public static final int forwardSpeed = 4;
+
+    public static final int tickMillisecond = 30;
 }
