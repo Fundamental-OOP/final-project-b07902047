@@ -5,11 +5,11 @@ import FlappyBird.controller.Controller;
 import FlappyBird.controller.KeyboardEventListener;
 import FlappyBird.events.*;
 import FlappyBird.models.Model;
-import FlappyBird.view.components.audio.*;
+import FlappyBird.view.components.audio.AudioPlayer;
+import FlappyBird.view.components.audio.AudioPlayerInterface;
 import FlappyBird.view.components.view.*;
 
 import javax.swing.*;
-import java.util.HashMap;
 
 /**
  * Draws the model state onto the screen.
@@ -22,7 +22,7 @@ public class View implements Listener {
 
     JFrame jFrame;
     Renderer renderer;
-    HashMap<String, AudioComponent> audioPlayer;
+    AudioPlayerInterface audioPlayer;
 
     public View(Model model, Controller controller) {
         EventManager.registerListener(this);
@@ -53,14 +53,12 @@ public class View implements Listener {
             this.renderer.render();
         } else if (event instanceof InitializeEvent) {
             initialize();
-            // TODO remove: controller.addQueuedEvent(new StateChangeEvent(new PlayState()));
         } else if (event instanceof ScoreEvent) {
-            audioPlayer.get("point").play();
+            audioPlayer.playGetPointSound();
         } else if (event instanceof HitEvent) {
-            audioPlayer.get("hit").play();
-            audioPlayer.get("die").play();
+            audioPlayer.playHitSound();
         } else if (event instanceof JumpEvent) {
-            audioPlayer.get("wing").play();
+            audioPlayer.playJumpSound();
         } else if (event instanceof QuitEvent) {
             this.initialized = false;
             jFrame.setVisible(false);
@@ -89,12 +87,7 @@ public class View implements Listener {
     }
 
     private void setupAudioPlayer() {
-        audioPlayer = new HashMap<>();
-        audioPlayer.put("die", new DieAudioComponent());
-        audioPlayer.put("hit", new HitAudioComponent());
-        audioPlayer.put("point", new PointAudioComponent());
-        audioPlayer.put("swoosh", new SwooshAudioComponent());
-        audioPlayer.put("wing", new WingAudioComponent());
+        audioPlayer = new AudioPlayer();
     }
 }
 
