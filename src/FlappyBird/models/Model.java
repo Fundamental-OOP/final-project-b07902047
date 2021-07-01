@@ -74,9 +74,7 @@ public class Model implements Listener {
         if (event instanceof StateChangeEvent) {
             StateChangeEvent stateChangeEvent = (StateChangeEvent) event;
             if (stateChangeEvent.getState() == null) {
-                if (this.stateMachine.pop() == null) {
-                    EventManager.post(new QuitEvent());
-                }
+                popStateMachine();
             } else {
                 this.stateMachine.push(stateChangeEvent.getState());
             }
@@ -89,6 +87,15 @@ public class Model implements Listener {
             initialize();
         } else if (event instanceof QuitEvent) {
             this.running = false;
+        } else if (event instanceof ResetEvent){
+            popStateMachine();
+            initialize();
+        }
+    }
+
+    private void popStateMachine() {
+        if (this.stateMachine.pop() == null) {
+            EventManager.post(new QuitEvent());
         }
     }
 
