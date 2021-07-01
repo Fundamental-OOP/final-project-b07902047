@@ -78,8 +78,7 @@ public class View implements Listener {
 
     private void setupRenderer() {
         renderer = new Renderer(model);
-
-        renderer.addViewComponent(new BackgroundViewComponent(model.getBackgroundTheme()))
+        renderer.addViewComponent(new BackgroundViewComponent(model.getBackground()))
                 .addViewComponent(new PipeViewComponent(model.getPipeList()))
                 .addViewComponent(new GroundViewComponent(model.getGround()))
                 .addViewComponent(new ScoreViewComponent(model))

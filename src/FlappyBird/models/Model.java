@@ -2,8 +2,7 @@ package FlappyBird.models;
 
 import FlappyBird.Const;
 import FlappyBird.events.*;
-import FlappyBird.models.objects.Bird;
-import FlappyBird.models.objects.Ground;
+import FlappyBird.models.objects.*;
 import FlappyBird.models.objects.Object;
 import FlappyBird.models.objects.PipeList;
 import FlappyBird.models.objects.SelfControlled;
@@ -28,10 +27,10 @@ public class Model implements Listener {
 
     private Bird bird;
     private Ground ground;
+    private Background background;
     private List<SelfControlled> selfControlledEntities;
 
     private PipeList pipeList;
-    private BackgroundTheme backgroundTheme;
 
     public Model(Bird bird) {
         EventManager.registerListener(this);
@@ -48,8 +47,10 @@ public class Model implements Listener {
         );
         bird.setMaxPositionY(ground.getY() - Const.birdHeight + 1);
         this.pipeList = new PipeList(ground.getY(), PipeType.randomPipeType(rnd));
+        this.background = new Background(0, 0, Const.screenX, Const.screenY);
         selfControlledEntities.add(ground);
         selfControlledEntities.add(pipeList);
+        selfControlledEntities.add(background);
     }
 
     /**
@@ -113,6 +114,8 @@ public class Model implements Listener {
         return bird;
     }
 
+    public Background getBackground() { return background; }
+
     public Random getRnd() {
         return rnd;
     }
@@ -138,19 +141,12 @@ public class Model implements Listener {
         return score;
     }
 
-    public BackgroundTheme getBackgroundTheme() {
-        return backgroundTheme;
-    }
-
     private void initialize() {
         this.bird.initialize(rnd.nextInt(this.bird.getTotalState()), rnd.nextInt(this.bird.getTotalState()));
         selfControlledEntities.forEach(entities -> entities.initialize(this));
 
         this.running = true;
         this.score = 0;
-        // Randomly pick a background theme
-        this.backgroundTheme = BackgroundTheme.randomBackgroundTheme(rnd);
-        System.out.println(this.backgroundTheme);
     }
 
     public State getState() {
