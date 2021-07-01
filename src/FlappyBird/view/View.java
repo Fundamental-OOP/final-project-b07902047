@@ -72,7 +72,7 @@ public class View implements Listener {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setSize(Const.screenX, Const.screenY);
         jFrame.setResizable(false);
-        jFrame.addKeyListener(new KeyboardEventListener(controller, model));
+        jFrame.addKeyListener(controller.getKeyboardEventListener());
     }
 
     private void setupRenderer() {
