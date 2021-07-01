@@ -1,5 +1,6 @@
 package FlappyBird.view.components;
 
+import FlappyBird.models.objects.Object;
 import FlappyBird.models.objects.Pipe;
 import FlappyBird.models.objects.PipeList;
 import FlappyBird.view.ImageNotFoundException;
@@ -14,8 +15,7 @@ public class PipeViewComponent implements ViewComponent {
     private final PipeList pipeList;
     private final String imagePath = "./src/FlappyBird/view/images/pipes/";
     private final String[] pipeColors = {"green", "red"};
-    private final String[] pipePositions = {"lower", "upper"};
-    private BufferedImage[][] images;
+    private BufferedImage[] upperPipeImages, lowerPipeImages;
 
     public PipeViewComponent(PipeList pipeList) {
         loadImages();
@@ -30,23 +30,36 @@ public class PipeViewComponent implements ViewComponent {
     }
 
     private void paintPipe(Graphics g, Pipe pipe) {
+        paintUpperPipe(g, pipe);
+        paintLowerPipe(g, pipe);
+    }
+
+    private void paintLowerPipe(Graphics g, Pipe pipe) {
         int color = pipe.getType().ordinal();
-        BufferedImage bottomPipeImage = images[color][0];
-        BufferedImage upperPipeImage = images[color][1];
-        BufferedImage bottomPipe = bottomPipeImage.getSubimage(0, 0, bottomPipeImage.getWidth(), Math.min(pipe.getBottomPipe().getHeight(), bottomPipeImage.getHeight()));
-        BufferedImage upperPipe = upperPipeImage.getSubimage(0, Math.max(upperPipeImage.getHeight() - pipe.getUpperPipe().getHeight(), 0), bottomPipeImage.getWidth(), Math.min(pipe.getUpperPipe().getHeight(), bottomPipeImage.getHeight()));
-        g.drawImage(bottomPipe, pipe.getX(), pipe.getBottomPipe().getY(), pipe.getWidth(), pipe.getBottomPipe().getHeight(), null);
-        g.drawImage(upperPipe, pipe.getX(), pipe.getUpperPipe().getY(), pipe.getWidth(), pipe.getUpperPipe().getHeight(), null);
+        Object halfPipe = pipe.getBottomPipe();
+        BufferedImage image = lowerPipeImages[color];
+        BufferedImage subImage = image.getSubimage(0, 0, image.getWidth(), Math.min(halfPipe.getHeight(), image.getHeight()));
+        g.drawImage(subImage, pipe.getX(), halfPipe.getY(), pipe.getWidth(), halfPipe.getHeight(), null);
+    }
+
+    private void paintUpperPipe(Graphics g, Pipe pipe) {
+        int color = pipe.getType().ordinal();
+        Object halfPipe = pipe.getUpperPipe();
+        BufferedImage image = upperPipeImages[color];
+        BufferedImage subImage = image.getSubimage(0, Math.max(image.getHeight() - halfPipe.getHeight(), 0), image.getWidth(), Math.min(halfPipe.getHeight(), image.getHeight()));
+        g.drawImage(subImage, pipe.getX(), halfPipe.getY(), pipe.getWidth(), halfPipe.getHeight(), null);
     }
 
     private void loadImages() {
-        images = new BufferedImage[pipeColors.length][pipePositions.length];
+        upperPipeImages = new BufferedImage[pipeColors.length];
+        lowerPipeImages = new BufferedImage[pipeColors.length];
         try {
             for (int i = 0; i < pipeColors.length; ++i) {
-                for (int j = 0; j < pipePositions.length; ++j) {
-                    String filepath = imagePath + "pipe-" + pipeColors[i] + "-" + pipePositions[j] + ".png";
-                    images[i][j] = ImageIO.read(new File(filepath));
-                }
+                String upperPipeImagePath = imagePath + "pipe-" + pipeColors[i] + "-upper" + ".png";
+                upperPipeImages[i] = ImageIO.read(new File(upperPipeImagePath));
+
+                String lowerPipeImagePath = imagePath + "pipe-" + pipeColors[i] + "-lower" + ".png";
+                lowerPipeImages[i] = ImageIO.read(new File(lowerPipeImagePath));
             }
         } catch (IOException ignore) {
             throw new ImageNotFoundException();

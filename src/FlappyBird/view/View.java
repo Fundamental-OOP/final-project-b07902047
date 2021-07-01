@@ -72,13 +72,14 @@ public class View implements Listener {
 
     private Renderer setupRenderer() {
         renderer = new Renderer(model);
-        renderer.addViewComponent(new BackgroundViewComponent(model.getBackgroundTheme()));
-        renderer.addViewComponent(new PipeViewComponent(model.getPipeList()));
-        renderer.addViewComponent(new GroundViewComponent(model.getGround()));
-        renderer.addViewComponent(new ScoreViewComponent(model));
-        renderer.addViewComponent(new MenuViewComponent(model));
-        renderer.addViewComponent(new DeadViewComponent(model));
-        renderer.addViewComponent(new BirdViewComponent(model.getBird()));
+
+        renderer.addViewComponent(new BackgroundViewComponent(model.getBackgroundTheme()))
+                .addViewComponent(new PipeViewComponent(model.getPipeList()))
+                .addViewComponent(new GroundViewComponent(model.getGround()))
+                .addViewComponent(new ScoreViewComponent(model))
+                .addViewComponent(new MenuViewComponent(model))
+                .addViewComponent(new DeadViewComponent(model))
+                .addViewComponent(new BirdViewComponent(model.getBird()));
 
         return renderer;
     }
