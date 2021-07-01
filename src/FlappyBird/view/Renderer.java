@@ -1,9 +1,8 @@
 package FlappyBird.view;
 
 import FlappyBird.Const;
-import FlappyBird.events.*;
 import FlappyBird.models.Model;
-import FlappyBird.view.components.*;
+import FlappyBird.view.components.view.ViewComponent;
 
 import javax.swing.*;
 import java.awt.*;

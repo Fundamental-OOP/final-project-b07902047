@@ -1,4 +1,4 @@
-package FlappyBird.view.components;
+package FlappyBird.view.components.view;
 
 import FlappyBird.models.objects.Object;
 import FlappyBird.models.objects.Pipe;

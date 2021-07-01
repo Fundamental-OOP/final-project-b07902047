@@ -1,7 +1,6 @@
-package FlappyBird.view.components;
+package FlappyBird.view.components.view;
 
 import FlappyBird.Const;
-import FlappyBird.events.BaseEvent;
 import FlappyBird.models.objects.Ground;
 import FlappyBird.view.ImageNotFoundException;
 

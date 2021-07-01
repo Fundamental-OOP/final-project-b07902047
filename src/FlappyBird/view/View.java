@@ -4,9 +4,11 @@ import FlappyBird.Const;
 import FlappyBird.controller.Controller;
 import FlappyBird.events.*;
 import FlappyBird.models.Model;
-import FlappyBird.view.components.*;
+import FlappyBird.view.components.audio.*;
+import FlappyBird.view.components.view.*;
 
 import javax.swing.*;
+import java.util.HashMap;
 
 /**
  * Draws the model state onto the screen.
@@ -19,6 +21,7 @@ public class View implements Listener {
 
     JFrame jFrame;
     Renderer renderer;
+    HashMap<String, AudioComponent> audioPlayer;
 
     public View(Model model, Controller controller) {
         EventManager.registerListener(this);
@@ -35,6 +38,7 @@ public class View implements Listener {
         }
 
         setupRenderer();
+        setupAudioPlayer();
 
         jFrame.add(renderer);
         jFrame.setVisible(true);
@@ -50,9 +54,12 @@ public class View implements Listener {
             initialize();
             // TODO remove: controller.addQueuedEvent(new StateChangeEvent(new PlayState()));
         } else if (event instanceof ScoreEvent) {
-
+            audioPlayer.get("point").play();
         } else if (event instanceof HitEvent) {
-            // play sound
+            audioPlayer.get("hit").play();
+            audioPlayer.get("die").play();
+        } else if (event instanceof JumpEvent) {
+            audioPlayer.get("wing").play();
         } else if (event instanceof QuitEvent) {
             this.initialized = false;
             jFrame.setVisible(false);
@@ -69,7 +76,7 @@ public class View implements Listener {
         jFrame.addKeyListener(new KeyboardEventListener(controller, model));
     }
 
-    private Renderer setupRenderer() {
+    private void setupRenderer() {
         renderer = new Renderer(model);
         renderer.addViewComponent(new BackgroundViewComponent(model.getBackground()))
                 .addViewComponent(new PipeViewComponent(model.getPipeList()))
@@ -78,8 +85,15 @@ public class View implements Listener {
                 .addViewComponent(new MenuViewComponent(model))
                 .addViewComponent(new DeadViewComponent(model))
                 .addViewComponent(new BirdViewComponent(model.getBird()));
+    }
 
-        return renderer;
+    private void setupAudioPlayer() {
+        audioPlayer = new HashMap<>();
+        audioPlayer.put("die", new DieAudioComponent());
+        audioPlayer.put("hit", new HitAudioComponent());
+        audioPlayer.put("point", new PointAudioComponent());
+        audioPlayer.put("swoosh", new SwooshAudioComponent());
+        audioPlayer.put("wing", new WingAudioComponent());
     }
 }
 
