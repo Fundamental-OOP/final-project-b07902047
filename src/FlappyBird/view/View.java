@@ -2,7 +2,6 @@ package FlappyBird.view;
 
 import FlappyBird.Const;
 import FlappyBird.controller.Controller;
-import FlappyBird.controller.KeyboardEventListener;
 import FlappyBird.events.*;
 import FlappyBird.models.Model;
 import FlappyBird.view.components.*;
