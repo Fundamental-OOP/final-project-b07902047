@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public enum BackgroundTheme {
-    DAY, NIGHT;
+public enum BirdType {
+    BLUE, RED, YELLOW;
 
-    private static final List<BackgroundTheme> VALUES =
+    private static final List<BirdType> VALUES =
             Collections.unmodifiableList(Arrays.asList(values()));
 
-    public static BackgroundTheme randomBackgroundTheme(Random rnd)  {
+    public static BirdType randomBirdType(Random rnd)  {
         return VALUES.get(rnd.nextInt(VALUES.size()));
     }
 }
