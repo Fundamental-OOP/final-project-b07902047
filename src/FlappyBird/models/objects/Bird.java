@@ -71,8 +71,8 @@ public class Bird extends Object {
         return type;
     }
 
-    public int getVelocity() {
-        return velocity;
+    public void jump() {
+        this.setVelocity(Const.birdFlapVelocity);
     }
 
     public void speedUp() {

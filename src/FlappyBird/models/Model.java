@@ -86,7 +86,7 @@ public class Model implements Listener {
             State curState = this.stateMachine.peek();
             curState.runTick(this);
         } else if (event instanceof JumpEvent) {
-            bird.setVelocity(Const.birdFlapVelocity);
+            bird.jump();
         } else if (event instanceof InitializeEvent) {
             initialize();
         } else if (event instanceof QuitEvent) {
