@@ -63,7 +63,7 @@ public class Model implements Listener {
             EventManager.post(new TickEvent());
 
             try {
-                Thread.sleep(30);
+                Thread.sleep(Const.tickMillisecond);
             } catch (InterruptedException ignored) {
             }
         }
