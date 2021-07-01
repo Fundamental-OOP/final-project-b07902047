@@ -29,8 +29,9 @@ public class ScoreViewComponent implements ViewComponent {
         if (model.getState() instanceof MenuState) {
             return;
         }
+
         int currentScore = model.getScore();
-        List<Integer> scoreDigits = seperateScoreToDigit(currentScore);
+        List<Integer> scoreDigits = separateScoreToDigit(currentScore);
         Collections.reverse(scoreDigits);
         int scoreWidth = getScoreWidth(scoreDigits);
         int startX = 144 - scoreWidth / 2;
@@ -38,10 +39,9 @@ public class ScoreViewComponent implements ViewComponent {
             g.drawImage(images[i], startX, 100, null);
             startX += images[i].getWidth(null) + scoreFontMargin;
         }
-        ;
     }
 
-    private List<Integer> seperateScoreToDigit(int score) {
+    private List<Integer> separateScoreToDigit(int score) {
         Stack<Integer> stack = new Stack<>();
         if (score == 0) stack.push(0);
         while (score > 0) {
