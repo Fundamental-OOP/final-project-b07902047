@@ -28,7 +28,7 @@ public class MenuViewComponent implements ViewComponent {
 
     @Override
     public void paint(Graphics g) {
-        if (model.getState() instanceof MenuState) {
+        if (model.showMenu()) {
             g.drawImage(image, 52, 50, 184, 267, null);
         }
     }
