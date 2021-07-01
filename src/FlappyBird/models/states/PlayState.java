@@ -1,10 +1,14 @@
 package FlappyBird.models.states;
 
-import java.util.List;
-
-import FlappyBird.events.*;
+import FlappyBird.events.EventManager;
+import FlappyBird.events.HitEvent;
+import FlappyBird.events.ScoreEvent;
+import FlappyBird.events.StateChangeEvent;
 import FlappyBird.models.Model;
-import FlappyBird.models.objects.*;
+import FlappyBird.models.objects.Bird;
+import FlappyBird.models.objects.SelfControlled;
+
+import java.util.List;
 
 public class PlayState extends State {
     public PlayState() {

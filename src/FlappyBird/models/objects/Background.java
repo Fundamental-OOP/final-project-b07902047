@@ -2,9 +2,7 @@ package FlappyBird.models.objects;
 
 import FlappyBird.models.BackgroundTheme;
 import FlappyBird.models.Model;
-import FlappyBird.models.PipeType;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 

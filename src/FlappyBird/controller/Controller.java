@@ -6,8 +6,6 @@ import FlappyBird.models.Model;
 
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Controller implements Listener {
     Model model;

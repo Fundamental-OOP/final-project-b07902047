@@ -1,6 +1,5 @@
 package FlappyBird.view.components.view;
 
-import FlappyBird.Const;
 import FlappyBird.models.BackgroundTheme;
 import FlappyBird.models.objects.Background;
 import FlappyBird.view.ImageNotFoundException;
@@ -10,8 +9,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BackgroundViewComponent implements ViewComponent {
     private final Background background;

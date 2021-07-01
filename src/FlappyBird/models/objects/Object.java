@@ -1,9 +1,6 @@
 package FlappyBird.models.objects;
 
-import FlappyBird.models.Model;
-import FlappyBird.models.states.State;
-
-import java.awt.Rectangle;
+import java.awt.*;
 
 public class Object {
     protected int x;

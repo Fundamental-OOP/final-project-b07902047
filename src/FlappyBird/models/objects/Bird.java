@@ -1,11 +1,11 @@
 package FlappyBird.models.objects;
 
-import java.util.List;
-
 import FlappyBird.Const;
 import FlappyBird.models.BirdType;
 import FlappyBird.models.stateHandlers.StateHandler;
 import FlappyBird.models.states.State;
+
+import java.util.List;
 
 public class Bird extends Object {
     // bird flap state (image 0/1/2/3)

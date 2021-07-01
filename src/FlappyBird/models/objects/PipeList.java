@@ -4,8 +4,8 @@ import FlappyBird.Const;
 import FlappyBird.models.Model;
 import FlappyBird.models.PipeType;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class PipeList implements SelfControlled {

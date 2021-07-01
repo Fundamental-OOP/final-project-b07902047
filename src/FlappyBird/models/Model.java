@@ -2,10 +2,8 @@ package FlappyBird.models;
 
 import FlappyBird.Const;
 import FlappyBird.events.*;
-import FlappyBird.models.objects.*;
 import FlappyBird.models.objects.Object;
-import FlappyBird.models.objects.PipeList;
-import FlappyBird.models.objects.SelfControlled;
+import FlappyBird.models.objects.*;
 import FlappyBird.models.states.DeadState;
 import FlappyBird.models.states.MenuState;
 import FlappyBird.models.states.State;

@@ -1,7 +1,6 @@
 package FlappyBird.view.components.view;
 
 import FlappyBird.models.Model;
-import FlappyBird.models.states.DeadState;
 import FlappyBird.view.ImageNotFoundException;
 
 import javax.imageio.ImageIO;

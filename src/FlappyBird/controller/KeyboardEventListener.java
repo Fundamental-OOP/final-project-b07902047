@@ -1,9 +1,10 @@
 package FlappyBird.controller;
 
 import FlappyBird.controller.policies.KeyboardEventPolicy;
-import FlappyBird.events.*;
+import FlappyBird.events.BaseEvent;
+import FlappyBird.events.ControllerEvent;
 import FlappyBird.models.Model;
-import FlappyBird.models.states.*;
+import FlappyBird.models.states.State;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

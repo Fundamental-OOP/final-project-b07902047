@@ -1,7 +1,6 @@
 package FlappyBird.events;
 
 import java.util.ArrayList;
-import java.util.EventListener;
 
 /**
  * Coordinate communication between the FlappyBird.models.Model, FlappyBird.view.View, and FlappyBird.controller.Controller.

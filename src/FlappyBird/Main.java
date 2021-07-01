@@ -1,14 +1,13 @@
 package FlappyBird;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import FlappyBird.controller.Controller;
-import FlappyBird.events.EventManager;
 import FlappyBird.models.Model;
 import FlappyBird.models.objects.Bird;
 import FlappyBird.models.stateHandlers.*;
 import FlappyBird.view.View;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {

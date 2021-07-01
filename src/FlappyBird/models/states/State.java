@@ -1,7 +1,5 @@
 package FlappyBird.models.states;
 
-import java.util.List;
-
 import FlappyBird.models.Model;
 import FlappyBird.models.objects.Bird;
 
