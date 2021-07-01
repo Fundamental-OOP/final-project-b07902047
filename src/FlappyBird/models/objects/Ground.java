@@ -1,23 +1,36 @@
 package FlappyBird.models.objects;
 
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
+
 import FlappyBird.Const;
 import FlappyBird.models.Model;
-import FlappyBird.models.states.PlayState;
-import FlappyBird.models.states.State;
 
-public class Ground extends Object {
+public class Ground extends Object implements SelfControlled {
     public Ground(int x, int y, int width, int height) {
         super(x, y, width, height);
     }
 
+    @Override
     public void updatePosition() {
         x = (x - Const.forwardSpeed + width) % width;
     }
 
     @Override
-    public void actToState(Model model, State state) {
-        if (state instanceof PlayState) {
-            this.updatePosition();
-        }
+    public Rectangle getRectangle() {
+        return new Rectangle(0, y, width, height);
+    }
+
+    @Override
+    public List<Object> getObjects() {
+        List<Object> objects = new ArrayList<Object>();
+        objects.add(this);
+        return objects;
+    }
+
+    @Override
+    public void initialize(Model model) {
+        this.setX(0);
     }
 }

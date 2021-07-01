@@ -6,6 +6,7 @@ import FlappyBird.models.objects.Bird;
 import FlappyBird.models.objects.Ground;
 import FlappyBird.models.objects.Object;
 import FlappyBird.models.objects.PipeList;
+import FlappyBird.models.objects.SelfControlled;
 import FlappyBird.models.states.MenuState;
 import FlappyBird.models.states.State;
 import FlappyBird.models.states.StateMachine;
@@ -26,17 +27,28 @@ public class Model implements Listener {
 
     private Bird bird;
     private Ground ground;
-    private List<Object> objects;
+    private List<SelfControlled> selfControlledEntities;
 
     private PipeList pipeList;
     private BackgroundTheme backgroundTheme;
 
-    public Model() {
+    public Model(Bird bird) {
         EventManager.registerListener(this);
         rnd = new Random();
         this.stateMachine = new StateMachine();
         this.running = false;
-        this.objects = new ArrayList<>();
+        this.selfControlledEntities = new ArrayList<SelfControlled>();
+        this.bird = bird;
+        this.ground = new Ground(
+            0,
+            (int) Math.round(Const.screenY * 0.8),
+            Const.screenX,
+            (int) Math.round(Const.screenY * 0.2)
+        );
+        bird.setMaxPositionY(ground.getY() - Const.birdHeight + 1);
+        this.pipeList = new PipeList(ground.getY(), PipeType.randomPipeType(rnd));
+        selfControlledEntities.add(ground);
+        selfControlledEntities.add(pipeList);
     }
 
     /**
@@ -51,7 +63,7 @@ public class Model implements Listener {
             EventManager.post(new TickEvent());
 
             try {
-                Thread.sleep(50);
+                Thread.sleep(30);
             } catch (InterruptedException ignored) {
             }
         }
@@ -100,12 +112,25 @@ public class Model implements Listener {
         return bird;
     }
 
+    public Random getRnd() {
+        return rnd;
+    }
+
     public PipeList getPipeList() {
         return pipeList;
     }
 
     public List<Object> getObjects() {
+        List<Object> objects = new ArrayList<Object>();
+        objects.add(bird);
+        for (SelfControlled selfControlledEntity : selfControlledEntities) {
+            objects.addAll(selfControlledEntity.getObjects());
+        }
         return objects;
+    }
+
+    public List<SelfControlled> getSelfControlledEntities() {
+        return selfControlledEntities;
     }
 
     public int getScore() {
@@ -117,25 +142,9 @@ public class Model implements Listener {
     }
 
     private void initialize() {
-        this.bird = new Bird(
-                Const.birdInitX,
-                Const.birdInitY,
-                Const.birdWidth,
-                Const.birdHeight,
-                0,
-                rnd.nextInt(2),
-                4
-        );
-        objects.add(this.bird);
-        this.ground = new Ground(
-                0,
-                (int) Math.round(Const.screenY * 0.8),
-                Const.screenX,
-                (int) Math.round(Const.screenY * 0.2)
-        );
-        objects.add(this.ground);
+        this.bird.initialize(rnd.nextInt(this.bird.getTotalState()), rnd.nextInt(this.bird.getTotalState()));
+        selfControlledEntities.forEach(entities -> entities.initialize(this));
 
-        this.pipeList = new PipeList(ground.getY());
         this.running = true;
         this.score = 0;
         // Randomly pick a background theme

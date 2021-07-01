@@ -1,7 +1,9 @@
 package FlappyBird.view.components;
 
+import FlappyBird.Const;
 import FlappyBird.events.BaseEvent;
 import FlappyBird.models.objects.Ground;
+import FlappyBird.view.ImageNotFoundException;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -16,11 +18,7 @@ public class GroundViewComponent implements ViewComponent {
     {
         try {
             image = ImageIO.read(new File(imagePath));
-        } catch (IOException ignore) { throw new RuntimeException(); }
-    }
-
-    public GroundViewComponent() {
-        // TODO: delete this
+        } catch (IOException ignore) { throw new ImageNotFoundException(); }
     }
 
     public GroundViewComponent(Ground ground) {
@@ -29,6 +27,7 @@ public class GroundViewComponent implements ViewComponent {
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(image, 0, 400, 336, 112, null);
+        g.drawImage(image, this.ground.getX(), this.ground.getY(), this.ground.getWidth(), this.ground.getHeight(), null);
+        g.drawImage(image, this.ground.getX() - Const.screenX, this.ground.getY(), this.ground.getWidth(), this.ground.getHeight(), null);
     }
 }

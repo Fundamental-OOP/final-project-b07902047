@@ -1,19 +1,22 @@
 package FlappyBird.models.objects;
 
 import FlappyBird.Const;
+import FlappyBird.models.Model;
 import FlappyBird.models.PipeType;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class PipeList {
+public class PipeList implements SelfControlled {
     private List<Pipe> pipes;
     private int nextPipeGapX;
     private int groundY;
+    private PipeType pipeType;
     private Random rnd;
 
-    public PipeList(int groundY) {
+    public PipeList(int groundY, PipeType pipeType) {
+        this.pipeType = pipeType;
         pipes = new ArrayList<Pipe>();
         nextPipeGapX = 100; // The first pipe will be 100 distance away
         this.groundY = groundY; // The y coordinate of the ground. Pipes should be above it.
@@ -39,10 +42,8 @@ public class PipeList {
     }
 
     private void removeOutOfBoundPipes() {
-        while (pipes.size() != 0) {
-            if (pipes.get(0).getX() + pipes.get(0).getWidth() < 0) {
-                pipes.remove(0);
-            }
+        while (pipes.size() != 0 && pipes.get(0).getX() + pipes.get(0).getWidth() < 0) {
+            pipes.remove(0);
         }
     }
 
@@ -52,7 +53,7 @@ public class PipeList {
             int upperY = rnd.nextInt(groundY - gapY); // heigher than ground and leave enough space for gap
             pipes.add(
                 new Pipe(
-                    PipeType.GREEN,
+                    this.pipeType,
                     Const.screenX,
                     Const.pipeWidth,
                     upperY,
@@ -64,7 +65,8 @@ public class PipeList {
         }
     }
 
-    public void updatePipes() {
+    @Override
+    public void updatePosition() {
         updatePipePosition(Const.forwardSpeed);
         removeOutOfBoundPipes();
         getNewPipe();
@@ -94,5 +96,27 @@ public class PipeList {
         return false;
     }
 
+    public List<Pipe> getPipes(){
+        return pipes;
+    }
 
+    public void removeAllPipes() {
+        pipes.clear();
+    }
+
+    @Override
+    public List<Object> getObjects() {
+        List<Object> objects = new ArrayList<Object>();
+        for (Pipe pipe : pipes) {
+            objects.add(pipe.getUpperPipe());
+            objects.add(pipe.getBottomPipe());
+        }
+        return objects;
+    }
+
+    @Override
+    public void initialize(Model model) {
+        this.removeAllPipes();
+        this.pipeType = PipeType.randomPipeType(model.getRnd());
+    }
 }

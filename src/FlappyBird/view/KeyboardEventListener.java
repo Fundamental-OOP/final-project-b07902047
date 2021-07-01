@@ -3,6 +3,7 @@ package FlappyBird.view;
 import FlappyBird.controller.Controller;
 import FlappyBird.events.InitializeEvent;
 import FlappyBird.events.JumpEvent;
+import FlappyBird.events.QuitEvent;
 import FlappyBird.events.StateChangeEvent;
 import FlappyBird.models.Model;
 import FlappyBird.models.states.*;
@@ -48,7 +49,7 @@ public class KeyboardEventListener implements KeyListener {
     private void getEventOnMenu(int keyCode) {
         switch (keyCode) {
             case KeyEvent.VK_ESCAPE:
-                controller.addQueuedEvent(new StateChangeEvent(null));
+                controller.addQueuedEvent(new QuitEvent());
                 break;
             case KeyEvent.VK_SPACE:
                 controller.addQueuedEvent(new StateChangeEvent(new PlayState()));
@@ -83,13 +84,12 @@ public class KeyboardEventListener implements KeyListener {
     private void getEventOnDead(int keyCode) {
         switch (keyCode) {
             case KeyEvent.VK_ESCAPE:
-                controller.addQueuedEvent(new StateChangeEvent(null));
-                controller.addQueuedEvent(new StateChangeEvent(null));
+                controller.addQueuedEvent(new QuitEvent());
+                break;
             case KeyEvent.VK_SPACE:
-                // TODO:
-                // controller.addQueuedEvent(new StateChangeEvent(null));
-                // controller.addQueuedEvent(new InitializeEvent());
-
+                controller.addQueuedEvent(new StateChangeEvent(null));
+                controller.addQueuedEvent(new InitializeEvent());
+                break;
         }
     }
 

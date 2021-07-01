@@ -1,7 +1,9 @@
 package FlappyBird.models.states;
 
+import java.util.List;
+
 import FlappyBird.models.Model;
-import FlappyBird.models.objects.Object;
+import FlappyBird.models.objects.Bird;
 
 public abstract class State {
     protected String name;
@@ -16,8 +18,7 @@ public abstract class State {
     }
 
     public void runTick(Model model) {
-        for (Object object : model.getObjects()) {
-            object.actToState(model, this);
-        }
+        Bird bird = model.getBird();
+        bird.actToState(this);
     }
 }

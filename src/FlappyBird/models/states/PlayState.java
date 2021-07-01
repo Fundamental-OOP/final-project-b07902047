@@ -1,13 +1,14 @@
 package FlappyBird.models.states;
 
+import java.util.List;
+
 import FlappyBird.events.*;
 import FlappyBird.models.Model;
 import FlappyBird.models.objects.*;
-import FlappyBird.models.objects.Object;
 
 public class PlayState extends State {
     public PlayState() {
-        super("Play");
+        super("State Play");
     }
 
     @Override
@@ -16,11 +17,12 @@ public class PlayState extends State {
             EventManager.post(new ScoreEvent());
         }
 
-        PipeList pipeList = model.getPipeList();
-        pipeList.updatePipes();
+        Bird bird = model.getBird();
+        bird.actToState(this);
 
-        for (Object object : model.getObjects()) {
-            object.actToState(model, this);
+        List<SelfControlled> selfControlledEntities = model.getSelfControlledEntities();
+        for (SelfControlled selfControlledEntity : selfControlledEntities) {
+            selfControlledEntity.updatePosition();
         }
 
         if (model.isCrashed()) {
