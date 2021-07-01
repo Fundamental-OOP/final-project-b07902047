@@ -4,8 +4,7 @@ import FlappyBird.Const;
 import FlappyBird.controller.Controller;
 import FlappyBird.events.*;
 import FlappyBird.models.Model;
-import FlappyBird.view.components.audio.AudioPlayer;
-import FlappyBird.view.components.audio.AudioPlayerInterface;
+import FlappyBird.view.components.audio.*;
 import FlappyBird.view.components.view.*;
 
 import javax.swing.*;
@@ -53,16 +52,14 @@ public class View implements Listener {
         } else if (event instanceof InitializeEvent) {
             initialize();
         } else if (event instanceof ScoreEvent) {
-            audioPlayer.playGetPointSound();
         } else if (event instanceof HitEvent) {
-            audioPlayer.playHitSound();
         } else if (event instanceof JumpEvent) {
-            audioPlayer.playJumpSound();
         } else if (event instanceof QuitEvent) {
             this.initialized = false;
             jFrame.setVisible(false);
             jFrame.dispose();
         }
+        audioPlayer.onEvent(event);
     }
 
     private void setupJFrame() {
@@ -86,7 +83,13 @@ public class View implements Listener {
     }
 
     private void setupAudioPlayer() {
-        audioPlayer = new AudioPlayer();
+        audioPlayer = new AudioPlayer(model);
+
+        audioPlayer.addAudioComponent(new DieAudioComponent())
+                .addAudioComponent(new HitAudioComponent())
+                .addAudioComponent(new PointAudioComponent())
+                .addAudioComponent(new SwooshAudioComponent())
+                .addAudioComponent(new WingAudioComponent());
     }
 }
 
