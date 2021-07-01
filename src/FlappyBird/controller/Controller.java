@@ -25,12 +25,12 @@ public class Controller implements Listener {
         }
     }
 
-    private void processTick() {
+    private synchronized void processTick() {
         queuedEventSet.forEach(EventManager::post);
         queuedEventSet.clear();
     }
 
-    public void addQueuedEvent(ControllerEvent event) {
+    public synchronized void addQueuedEvent(ControllerEvent event) {
         queuedEventSet.add(event);
     }
 
