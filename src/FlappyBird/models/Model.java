@@ -148,7 +148,8 @@ public class Model implements Listener {
         this.running = true;
         this.score = 0;
         // Randomly pick a background theme
-        this.backgroundTheme = BackgroundTheme.values()[rnd.nextInt(BackgroundTheme.values().length)];
+        this.backgroundTheme = BackgroundTheme.randomBackgroundTheme(rnd);
+        System.out.println(this.backgroundTheme);
     }
 
     public State getState() {

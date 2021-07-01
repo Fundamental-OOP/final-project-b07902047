@@ -1,6 +1,5 @@
-package FlappyBird.view.components;
+package FlappyBird.view.components.view;
 
-import FlappyBird.models.Model;
 import FlappyBird.models.objects.Bird;
 import FlappyBird.view.ImageNotFoundException;
 
@@ -8,7 +7,6 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 public class BirdViewComponent implements ViewComponent {
     private final String imageDirectoryPath = "./src/FlappyBird/view/images/birds/";

@@ -4,11 +4,10 @@ import FlappyBird.Const;
 import FlappyBird.controller.Controller;
 import FlappyBird.events.*;
 import FlappyBird.models.Model;
-import FlappyBird.view.components.*;
+import FlappyBird.view.components.audio.*;
+import FlappyBird.view.components.view.*;
 
 import javax.swing.*;
-import javax.sound.sampled.*;
-import java.io.File;
 import java.util.HashMap;
 
 /**

@@ -1,4 +1,4 @@
-package FlappyBird.view.components;
+package FlappyBird.view.components.view;
 
 import FlappyBird.Const;
 import FlappyBird.models.BackgroundTheme;
