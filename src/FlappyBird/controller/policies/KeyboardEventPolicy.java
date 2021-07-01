@@ -26,5 +26,6 @@ abstract public class KeyboardEventPolicy {
     }
 
     protected abstract Optional<BaseEvent> getEvent();
+
     public abstract boolean match(int keyCode, State state);
 }

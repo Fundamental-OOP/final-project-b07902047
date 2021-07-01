@@ -15,7 +15,7 @@ public enum BirdType {
     private static final List<BirdType> VALUES =
             Collections.unmodifiableList(Arrays.asList(values()));
 
-    public static BirdType randomBirdType(Random rnd)  {
+    public static BirdType randomBirdType(Random rnd) {
         return VALUES.get(rnd.nextInt(VALUES.size()));
     }
 }

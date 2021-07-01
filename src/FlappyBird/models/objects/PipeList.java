@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Random;
 
 public class PipeList implements SelfControlled {
-    private List<Pipe> pipes;
+    private final List<Pipe> pipes;
     private int nextPipeGapX;
-    private int groundY;
+    private final int groundY;
     private PipeType pipeType;
-    private Random rnd;
+    private final Random rnd;
 
     public PipeList(int groundY, PipeType pipeType) {
         this.pipeType = pipeType;
@@ -52,14 +52,14 @@ public class PipeList implements SelfControlled {
             int gapY = getNextPipeGapY(Const.minPipeGapY, Const.maxPipeGapY);
             int upperY = rnd.nextInt(groundY - gapY); // heigher than ground and leave enough space for gap
             pipes.add(
-                new Pipe(
-                    this.pipeType,
-                    Const.screenX,
-                    Const.pipeWidth,
-                    upperY,
-                    gapY,
-                    groundY - upperY - gapY
-                )
+                    new Pipe(
+                            this.pipeType,
+                            Const.screenX,
+                            Const.pipeWidth,
+                            upperY,
+                            gapY,
+                            groundY - upperY - gapY
+                    )
             );
             nextPipeGapX = getNextPipeGapX(Const.minPipeGapX, Const.maxPipeGapX);
         }
@@ -96,7 +96,7 @@ public class PipeList implements SelfControlled {
         return false;
     }
 
-    public List<Pipe> getPipes(){
+    public List<Pipe> getPipes() {
         return pipes;
     }
 

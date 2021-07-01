@@ -10,14 +10,16 @@ import java.io.File;
 import java.io.IOException;
 
 public class GroundViewComponent implements ViewComponent {
-    private Ground ground;
+    private final Ground ground;
     private final String imagePath = "./src/FlappyBird/view/images/ground.png";
-    private Image image;
+    private final Image image;
 
     {
         try {
             image = ImageIO.read(new File(imagePath));
-        } catch (IOException ignore) { throw new ImageNotFoundException(); }
+        } catch (IOException ignore) {
+            throw new ImageNotFoundException();
+        }
     }
 
     public GroundViewComponent(Ground ground) {

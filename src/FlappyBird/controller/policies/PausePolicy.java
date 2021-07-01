@@ -18,5 +18,6 @@ public class PausePolicy extends KeyboardEventPolicy {
     @Override
     public Optional<BaseEvent> getEvent() {
         return Optional.of(new StateChangeEvent(new StopState()));
-    };
+    }
+
 }

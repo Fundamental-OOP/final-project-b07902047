@@ -15,7 +15,7 @@ public enum BackgroundTheme {
     private static final List<BackgroundTheme> VALUES =
             Collections.unmodifiableList(Arrays.asList(values()));
 
-    public static BackgroundTheme randomBackgroundTheme(Random rnd)  {
+    public static BackgroundTheme randomBackgroundTheme(Random rnd) {
         return VALUES.get(rnd.nextInt(VALUES.size()));
     }
 }

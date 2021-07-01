@@ -3,9 +3,9 @@ package FlappyBird.models.objects;
 import FlappyBird.models.PipeType;
 
 public class Pipe {
-    private PipeType type;
+    private final PipeType type;
     private int x;
-    private int width;
+    private final int width;
     Object upperPipe, bottomPipe;
 
     /*

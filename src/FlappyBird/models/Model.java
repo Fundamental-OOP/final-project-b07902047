@@ -18,17 +18,17 @@ import java.util.Random;
  */
 
 public class Model implements Listener {
-    private StateMachine stateMachine;
+    private final StateMachine stateMachine;
     private boolean running;
-    private Random rnd;
+    private final Random rnd;
     private int score;
 
-    private Bird bird;
-    private Ground ground;
-    private Background background;
-    private List<SelfControlled> selfControlledEntities;
+    private final Bird bird;
+    private final Ground ground;
+    private final Background background;
+    private final List<SelfControlled> selfControlledEntities;
 
-    private PipeList pipeList;
+    private final PipeList pipeList;
 
     public Model(Bird bird) {
         EventManager.registerListener(this);
@@ -38,10 +38,10 @@ public class Model implements Listener {
         this.selfControlledEntities = new ArrayList<SelfControlled>();
         this.bird = bird;
         this.ground = new Ground(
-            0,
-            (int) Math.round(Const.screenY * 0.8),
-            Const.screenX,
-            (int) Math.round(Const.screenY * 0.2)
+                0,
+                (int) Math.round(Const.screenY * 0.8),
+                Const.screenX,
+                (int) Math.round(Const.screenY * 0.2)
         );
         bird.setMaxPositionY(ground.getY() - Const.birdHeight + 1);
         this.pipeList = new PipeList(ground.getY(), PipeType.randomPipeType(rnd));
@@ -87,7 +87,7 @@ public class Model implements Listener {
             initialize();
         } else if (event instanceof QuitEvent) {
             this.running = false;
-        } else if (event instanceof ResetEvent){
+        } else if (event instanceof ResetEvent) {
             popStateMachine();
             initialize();
         }
@@ -119,7 +119,9 @@ public class Model implements Listener {
         return bird;
     }
 
-    public Background getBackground() { return background; }
+    public Background getBackground() {
+        return background;
+    }
 
     public Random getRnd() {
         return rnd;

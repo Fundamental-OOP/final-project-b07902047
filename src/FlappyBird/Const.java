@@ -1,7 +1,9 @@
 package FlappyBird;
 
 public final class Const {
-    private Const() {} // Avoid others from initializing this class
+    private Const() {
+    } // Avoid others from initializing this class
+
     public static final int screenX = 288;
     public static final int screenY = 512;
 
@@ -17,6 +19,6 @@ public final class Const {
     public static final int maxPipeGapY = 120;
     public static final int minPipeGapX = 190;
     public static final int maxPipeGapX = 220;
-    
+
     public static final int forwardSpeed = 4;
 }

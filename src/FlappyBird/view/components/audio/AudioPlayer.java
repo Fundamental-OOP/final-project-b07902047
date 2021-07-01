@@ -8,8 +8,8 @@ import java.util.List;
 
 public class AudioPlayer implements AudioPlayerInterface {
 
-    private Model model;
-    private List<AudioComponent> audioComponents;
+    private final Model model;
+    private final List<AudioComponent> audioComponents;
 
     public AudioPlayer(Model model) {
         this.model = model;

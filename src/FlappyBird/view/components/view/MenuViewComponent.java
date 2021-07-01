@@ -9,9 +9,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class MenuViewComponent implements ViewComponent {
-    private Model model;
+    private final Model model;
     private final String imagePath = "./src/FlappyBird/view/images/menu.png";
-    private Image image;
+    private final Image image;
 
     {
         try {

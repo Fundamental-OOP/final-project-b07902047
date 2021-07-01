@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 class Renderer extends JPanel {
     Model model;
 

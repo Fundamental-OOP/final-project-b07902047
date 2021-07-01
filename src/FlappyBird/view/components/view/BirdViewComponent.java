@@ -14,7 +14,7 @@ public class BirdViewComponent implements ViewComponent {
     private final String[] birdColors = BirdType.getNames();
     private final String[] birdActions = {"down", "mid", "up"};
     private Image[][] images;
-    private Bird bird;
+    private final Bird bird;
 
     public BirdViewComponent(Bird bird) {
         this.bird = bird;

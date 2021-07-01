@@ -16,11 +16,7 @@ public class RestartPolicy extends KeyboardEventPolicy {
             return true;
         }
 
-        if (state instanceof DeadState && keyCode == KeyEvent.VK_SPACE) {
-            return true;
-        }
-
-        return false;
+        return state instanceof DeadState && keyCode == KeyEvent.VK_SPACE;
     }
 
     @Override

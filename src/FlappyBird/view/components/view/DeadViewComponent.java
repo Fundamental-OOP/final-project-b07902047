@@ -9,14 +9,16 @@ import java.io.File;
 import java.io.IOException;
 
 public class DeadViewComponent implements ViewComponent {
-    private Model model;
+    private final Model model;
     private final String imagePath = "./src/FlappyBird/view/images/gameover.png";
-    private Image image;
+    private final Image image;
 
     {
         try {
             image = ImageIO.read(new File(imagePath));
-        } catch (IOException ignore) { throw new ImageNotFoundException(); }
+        } catch (IOException ignore) {
+            throw new ImageNotFoundException();
+        }
     }
 
     public DeadViewComponent(Model model) {
@@ -26,7 +28,7 @@ public class DeadViewComponent implements ViewComponent {
     @Override
     public void paint(Graphics g) {
         if (model.isGameOver()) {
-            g.drawImage(image, 48, 150, 192 , 42, null);
+            g.drawImage(image, 48, 150, 192, 42, null);
         }
     }
 }

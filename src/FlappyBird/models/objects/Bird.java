@@ -9,7 +9,8 @@ import java.util.List;
 
 public class Bird extends Object {
     // bird flap state (image 0/1/2/3)
-    private int state, totalState;
+    private int state;
+    private final int totalState;
     // bird clock
     private int time;
     // bird type (red/green)
@@ -18,7 +19,7 @@ public class Bird extends Object {
     private int velocity;
     // When displaying the menu, make the bird move around a little
     // The bird will only move between [initY - boundary, initY + boundary]
-    private int boundary;
+    private final int boundary;
     // The direction the bird is flying towards. Positive for downward and negative for upward.
     // Swing speed
     private int swingVelocity;

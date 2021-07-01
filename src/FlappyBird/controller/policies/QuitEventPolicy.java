@@ -16,11 +16,7 @@ public class QuitEventPolicy extends KeyboardEventPolicy {
             return true;
         }
 
-        if (state instanceof DeadState && keyCode == KeyEvent.VK_ESCAPE) {
-            return true;
-        }
-
-        return false;
+        return state instanceof DeadState && keyCode == KeyEvent.VK_ESCAPE;
     }
 
     @Override

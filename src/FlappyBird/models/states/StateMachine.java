@@ -14,6 +14,7 @@ public class StateMachine {
 
     /**
      * returns the current state or null if the stack is empty
+     *
      * @return current state or null
      */
     public State peek() {
@@ -22,6 +23,7 @@ public class StateMachine {
 
     /**
      * remove the top state in the stack and return it
+     *
      * @return removed state or null
      */
     public State pop() {
@@ -36,6 +38,7 @@ public class StateMachine {
 
     /**
      * add new state to stack
+     *
      * @param state state to be added
      * @return added state
      */
