@@ -26,18 +26,16 @@ public class ScoreViewComponent implements ViewComponent {
 
     @Override
     public void paint(Graphics g) {
-        if (model.getState() instanceof MenuState) {
-            return;
-        }
-
-        int currentScore = model.getScore();
-        List<Integer> scoreDigits = separateScoreToDigit(currentScore);
-        Collections.reverse(scoreDigits);
-        int scoreWidth = getScoreWidth(scoreDigits);
-        int startX = 144 - scoreWidth / 2;
-        for (Integer i : scoreDigits) {
-            g.drawImage(images[i], startX, 100, null);
-            startX += images[i].getWidth(null) + scoreFontMargin;
+        if (model.showScore()) {
+            int currentScore = model.getScore();
+            List<Integer> scoreDigits = separateScoreToDigit(currentScore);
+            Collections.reverse(scoreDigits);
+            int scoreWidth = getScoreWidth(scoreDigits);
+            int startX = 144 - scoreWidth / 2;
+            for (Integer i : scoreDigits) {
+                g.drawImage(images[i], startX, 100, null);
+                startX += images[i].getWidth(null) + scoreFontMargin;
+            }
         }
     }
 

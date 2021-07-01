@@ -7,6 +7,7 @@ import FlappyBird.models.objects.Ground;
 import FlappyBird.models.objects.Object;
 import FlappyBird.models.objects.PipeList;
 import FlappyBird.models.objects.SelfControlled;
+import FlappyBird.models.states.DeadState;
 import FlappyBird.models.states.MenuState;
 import FlappyBird.models.states.State;
 import FlappyBird.models.states.StateMachine;
@@ -153,5 +154,17 @@ public class Model implements Listener {
 
     public State getState() {
         return stateMachine.peek();
+    }
+
+    public boolean isGameOver() {
+        return getState() instanceof DeadState;
+    }
+
+    public boolean showMenu() {
+        return getState() instanceof MenuState;
+    }
+
+    public boolean showScore() {
+        return !(getState() instanceof MenuState);
     }
 }
