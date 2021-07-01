@@ -1,35 +1,31 @@
 package FlappyBird.view.components.audio;
 
-public class AudioPlayer implements AudioPlayerInterface{
+import FlappyBird.events.BaseEvent;
+import FlappyBird.models.Model;
 
-    private AudioComponent DieAudio;
-    private AudioComponent HitAudio;
-    private AudioComponent PointAudio;
-    private AudioComponent WingAudio;
-    private AudioComponent SwooshAudio;
+import java.util.ArrayList;
+import java.util.List;
 
-    public AudioPlayer(){
-        this.DieAudio = new DieAudioComponent();
-        this.HitAudio = new HitAudioComponent();
-        this.PointAudio = new PointAudioComponent();
-        this.WingAudio = new WingAudioComponent();
-        this.SwooshAudio = new SwooshAudioComponent();
+public class AudioPlayer implements AudioPlayerInterface {
+
+    private Model model;
+    private List<AudioComponent> audioComponents;
+
+    public AudioPlayer(Model model) {
+        this.model = model;
+        audioComponents = new ArrayList<>();
     }
 
     @Override
-    public void playGetPointSound() {
-        PointAudio.play();
+    public AudioPlayerInterface addAudioComponent(AudioComponent component) {
+        audioComponents.add(component);
+        return this;
     }
 
     @Override
-    public void playJumpSound() {
-        WingAudio.play();
+    public void onEvent(BaseEvent event) {
+        for (AudioComponent audioComponent : audioComponents) {
+            audioComponent.onEvent(event, model.getState());
+        }
     }
-
-    @Override
-    public void playHitSound() {
-        HitAudio.play();
-        DieAudio.play();
-    }
-
 }

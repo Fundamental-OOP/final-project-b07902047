@@ -1,7 +1,8 @@
 package FlappyBird.view.components.audio;
 
+import FlappyBird.events.BaseEvent;
+
 public interface AudioPlayerInterface {
-    void playGetPointSound();
-    void playJumpSound();
-    void playHitSound();
+    void onEvent(BaseEvent event);
+    AudioPlayerInterface addAudioComponent(AudioComponent audioComponent);
 }
